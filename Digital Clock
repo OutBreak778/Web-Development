@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Digital Clock</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #181c20  ;
+        }
+        #time
+        {
+            display: flex;
+            gap: 40px;
+            color: #fff;
+            width: 86vh;
+        }
+        #time .circle
+        {
+            position: relative;
+            top: 4px;
+            width: 150px;
+            height: 150px;
+        }
+        #time div
+        {
+            position: absolute;
+            text-align: center;
+            font-weight: 400;
+            font-size: 1.5em;
+        }
+        #time .ap
+        {
+            position: relative;
+            font-size: 2em;
+            transform: translateX(-20px);
+        }
+        #time .circle svg
+        {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            transform: rotate(270deg);
+        }
+        /* It add border to the SVG shapes used in the svg pair tag*/
+        #time .circle svg circle
+        {
+            width: 100%;
+            height: 100%;
+            fill: transparent;
+            stroke: rgba(255, 255, 255, 0.377);
+            stroke-width: 4;
+            transform: translate(5px,3px);
+        }
+        #time .circle svg circle:nth-child(2)
+        {
+            stroke: var(--clr);
+            /* the stroke-dasharray work in the anti-clock wise direction */
+            /* Controls the pattern of dash and gaps between the stroke path */
+            stroke-dasharray: 440;
+        }
+        .dots 
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .dots::before
+        {
+            content: '';
+            position: absolute;
+            top: -3px;
+            /* left: 70px; */
+            width: 15px;
+            height: 15px;
+            background: var(--clr);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--clr),
+                        0 0 30px var(--clr);
+        }
+        #time .circle
+        {
+            top: 2px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="time">
+        <div class="circle" style="--clr:#ff2972;">
+            <div class="dots hr_dots"></div>
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70" id="hh"></circle>
+            </svg>
+            <div id="hours">00</div>
+        </div>
+        <div class="circle" style="--clr:#fee800;">
+            <div class="dots min_dots"></div>
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>                        
+                <circle cx="70" cy="70" r="70" id="mm"></circle>
+            </svg>
+            <div id="minutes">00</div>
+        </div>
+        <div class="circle" style="--clr:#04fc43;">
+            <div class="dots sec_dots"></div>
+            <svg>
+                <circle cx="70" cy="70" r="70"></circle>
+                <circle cx="70" cy="70" r="70" id="ss"></circle>
+            </svg>
+            <div id="seconds">00</div>
+        </div>
+        <div class="ap">
+            <div id="ampm">AM</div>
+        </div>
+    </div>
+
+
+    <script>
+        setInterval(()=>
+        {
+
+
+
+            let hours = document.getElementById('hours');
+            let minutes = document.getElementById('minutes');
+            let seconds = document.getElementById('seconds');
+            let ampm = document.getElementById('ampm');
+    
+            let hr_dots = document.querySelector('.hr_dots');
+            let min_dots = document.querySelector('.min_dots');
+            let sec_dots = document.querySelector('.sec_dots');
+
+            let hh = document.getElementById('hh');
+            let mm = document.getElementById('mm');
+            let ss = document.getElementById('ss');
+
+            // this function get the real time data from the database 
+            //from the computer
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+            let am = h > 12 ? "PM" : "AM";
+
+            // Converting the time into the normal time 
+            // i.e. 01: 05: 02;
+            // becasuse of this function time is written in 12hrs 
+            // format rather than 24hrs format
+            if(h > 12)
+            {
+                h = h - 12;
+            }
+
+            // This show the time in 12hrs format
+
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+    
+            // this represent the time on WebPage or on the live server
+            hours.innerHTML = h;
+            minutes.innerHTML = m;
+            seconds.innerHTML = s;
+            ampm.innerHTML = am;
+
+            hh.style.strokeDashoffset = 440 - (440 * h) / 12;
+            mm.style.strokeDashoffset = 440 - (440 * m ) / 60;
+            ss.style.strokeDashoffset = 440 - (440 * s ) / 60;
+            
+            hr_dots.style.transform = `rotate(${h * 30}deg)`;
+            // 360deg / 12hrs = 30deg; 
+            min_dots.style.transform = `rotate(${m * 6}deg)`;
+            // 360deg / 60min = 6deg; 
+            sec_dots.style.transform = `rotate(${s * 6}deg)`;
+            // 360deg / 60min = 6deg;
+
+
+        })
+
+
+    </script>
+</body>
+</html>
