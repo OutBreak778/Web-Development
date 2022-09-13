@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Color Palette Generator</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .btn
+        {
+            background: none;
+            color: #000;
+            padding: 10px 30px;
+            font-size: 1.5em;
+            margin: 20px auto;
+            max-width: 200px;
+            outline: none;
+            display: block;
+            border: 2px solid #000;
+            cursor: pointer;
+        }
+        .container
+        {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .box
+        {
+            width: 20%;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f00;
+            font-size: 1.5em;
+            border: 2px solid #fff;
+            color: #fff;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn" onclick="addColor();">Refresh</button>
+    <section class="container"></section>
+
+    <script>
+        for(let i = 1; i <= 100; i++)
+        {
+            const box = document.createElement('div');
+            box.classList.add('box');
+            document.querySelector('.container').appendChild(box);
+        }
+
+        const btn = document.querySelector('.btn');
+        const randomColor = document.querySelectorAll('.box');
+
+        function randomCode()
+        {
+            var chars = "0123456789abcdef";
+            var colorLength = 6;
+            var color = "";
+            for(var i = 0; i < colorLength; i++)
+            {
+                var randomColor = Math.floor(Math.random() * chars.length);
+                color += chars.substring(randomColor, randomColor+1);
+            }
+            return "#" + color;
+        }
+
+        function addColor()
+        {
+            randomColor.forEach(e =>
+            {
+                var newColor = randomCode();
+                e.style.background = newColor;
+                e.innerHTML = newColor;
+            })
+        }
+    </script>
+
+</body>
+</html>
