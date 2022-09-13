@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstract Background</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        section
+        {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            background: #222;
+            overflow: hidden;
+        }
+        .layer
+        {
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 100%;
+            height: 100vh;
+            box-shadow: 20px  10px 50px rgba(0,0,0,0.25);
+        }
+        .layer.layer1
+        {
+            background: #30a9f4;
+            transform: skewX(-45deg) translateX(0);
+            z-index: 1;
+        }
+        .layer.layer2
+        {
+            background: #fff;
+            transform: skewX(-45deg) translateX(-100px);
+            z-index: 3;
+        }
+        .layer.layer3
+        {
+            background: #ff3161;
+            transform: skewX(-45deg) translateX(-200px);
+            z-index: 5;
+        }
+        .layer.layer4
+        {
+            background: #222;
+            transform: skewX(-45deg) translateX(-300px);
+            z-index: 10;
+        }
+        .layer.layer5
+        {
+            background: #ff3161;
+            transform: skew(45deg) translateX(0);
+            z-index: 2;
+        }
+        .layer.layer6
+        {
+            background: #30a9f4;
+            transform: skew(45deg) translateX(-100px);
+            z-index: 4;
+        }
+        .layer.layer7
+        {
+            background: #fff;
+            transform: skew(45deg) translateX(-200px);
+            z-index: 6;
+        }
+        .layer.layer8
+        {
+            background: #222;
+            transform: skew(45deg) translateX(-300px);
+            z-index: 8;
+        }
+        .layer.layer9
+        {
+            background: transparent;
+            transform: skew(45deg) translateX(-300px);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <div class="layer layer1"></div>
+        <div class="layer layer2"></div>
+        <div class="layer layer3"></div>
+        <div class="layer layer4"></div>
+        <div class="layer layer5"></div>
+        <div class="layer layer6"></div>
+        <div class="layer layer7"></div>
+        <div class="layer layer8"></div>
+        <div class="layer layer9"></div>
+    </section>
+</body>
+</html>
