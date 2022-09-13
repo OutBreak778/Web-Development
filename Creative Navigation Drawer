@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+    <title>Navigation Bar with Indicator</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #2057f0;
+        }
+        nav
+        {
+            background: #fff;
+            border-radius: 10px;
+            padding: 0 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.01);
+        }
+        .navContent
+        {
+            display: flex;
+            position: relative;
+        }
+        .navList
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 15vh;
+            height: 100px;
+            list-style: none;
+        }
+        .linkItem
+        {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .linkItem.active .linkIcon
+        {
+            color: #2057f0;
+        }
+        .linkIcon
+        {
+            font-size: 35px;
+            color: #666; 
+            user-select: none;
+            transition: 0.5s;
+        }
+        .linkText
+        {
+            position: absolute;
+            font-size: 17px;
+            color: #2057f0;
+            font-weight: 800;
+            transform: translateY(32px);
+            opacity: 0;
+            user-select: nonex;
+        }
+        .linkItem.active .linkText
+        {
+            opacity: 1;
+        }
+        .indicator
+        {
+            position: absolute;
+            height: 33px;
+            width: 33px;
+            left: 48px;
+            border-radius: 50%;
+            top: -15px;
+            background: #fff;
+            border: 5px solid #2057f0;
+            transform: translateX(-50%);
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .indicator::before,
+        .indicator::after
+        {
+            content: '';
+            position: absolute;
+            height: 24px;
+            width: 19px;
+            bottom: -11px;
+        }
+        .indicator::before
+        {
+            left: -20px;
+            background: #fff;
+            border-top-right-radius: 25px;
+            box-shadow: 1px -14px #2057f0;
+        }
+        .indicator::after
+        {
+            right: -20px;
+            background: #fff;
+            border-top-left-radius: 25px;
+            box-shadow: -1px -14px #2057f0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <ul class="navContent">
+            <li class="navList">
+                <a href="#" class="linkItem active">
+                    <i class="bx bxs-home linkIcon"></i>
+                    <span class="linkText">Home</span>
+                </a>
+            </li>
+            <li class="navList">
+                <a href="#" class="linkItem">
+                    <i class="bx bxs-caret-right-square linkIcon"></i>
+                    <span class="linkText">Content</span>
+                </a>
+            </li>
+            <li class="navList">
+                <a href="#" class="linkItem">
+                    <i class="bx bxs-bar-chart-alt-2 linkIcon"></i>
+                    <span class="linkText">Analytics</span>
+                </a>
+            </li>
+            <li class="navList">
+                <a href="#" class="linkItem">
+                    <i class="bx bxs-message-rounded linkIcon"></i>
+                    <span class="linkText">Comments</span>
+                </a>
+            </li>
+            <li class="navList">
+                <a href="#" class="linkItem">
+                    <i class="bx bxs-user linkIcon"></i>
+                    <span class="linkText">Profile</span>
+                </a>
+            </li>
+
+            <span class="indicator"></span>
+        </ul>
+    </nav>
+    <script>
+        const LinkItems = document.querySelectorAll(".linkItem");
+        LinkItems.forEach((linkItem, index) =>
+        {
+            linkItem.addEventListener("click",()=>
+            {
+                document.querySelector(".active").classList.remove('active');
+                linkItem.classList.add('active');
+
+                const indicator = document.querySelector('.indicator');
+                indicator.style.left = `${index * 95 + 48}px`;
+            })
+        })
+        
+    </script>
+</body>
+</html>
