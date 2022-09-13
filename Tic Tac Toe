@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe | Javascript</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        body
+        {
+            background: #00d0ff;
+        }
+        .select, .playBoard, .result
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            transition: all 0.3s ease;
+        }
+        .select
+        {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 5px;
+            max-width: 350px;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .select.active
+        {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%,-50%) scale(0.9);
+        }
+        .select header
+        {
+            font-size: 23px;
+            font-weight: 600;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .select .title
+        {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+        .select .option
+        {
+            display: flex;
+            width: 100%;
+        }
+        .option button
+        {
+            width: 100%;
+            font-size: 18px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 8px 0;
+            border: none;
+            outline: none;
+            background: #4fc3dc;
+            margin: 0 10px;
+            border-radius: 5px;
+            display: block;
+            justify-content: space-between;
+            color: #fff;
+            transition: ease 0.2s;
+        }
+        .option button:hover,
+        .result .btn button:hover
+        {
+            transform: scale(0.9);
+        }
+        .option button .playerX
+        {
+            margin-right: 5px;
+        }
+        .option button .playerO
+        {
+            margin-right: 5px;
+        }
+        .playBoard
+        {
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%,-50%) scale(0.9);
+            
+        }
+        .playBoard.active
+        {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%,-50%) scale(1);
+            transition: 0.5s;
+        }
+        .playBoard .details
+        {
+            background: #fff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .playBoard .details .players
+        {
+            position: relative;
+            display: flex;
+            width: 100%;
+            margin: 4px;
+            justify-content: space-between;
+        }
+        .playBoard .details span
+        {
+            position: relative;
+            z-index: 5;
+            width: 100%;
+            border-radius: 4px;
+            padding: 8px 0;
+            font-size: 1.4em;
+            cursor: pointer;
+            text-align: center;
+            font-weight: 500;
+            width: 100%;    
+            color: #00d0ff;
+            transition: all 0.3s ease;
+        }
+        .details span:first-child
+        {
+            color: #fff;
+        }
+        .details span.active
+        {
+            color: #fff;
+            background: #00d0ff;
+        }
+        .details .slider
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            color: #fff;
+            border-radius: 5px;
+            z-index: 2;
+            background: #00d0ff;
+            transition: all 0.3s ease;
+        }
+        .players.active span:first-child
+        {   
+            color: #00d0ff;
+        }
+        .players.active span:nth-child(2)
+        {   
+            color: #fff;
+        }
+        .players.active .slider
+        {
+            left: 50%;
+        }
+        .playBoard section
+        {
+            display: flex;
+        }
+        .playBoard .playArea
+        {
+            margin-top: 20px;
+        }
+        .playBoard section span
+        {
+            display: block;
+            height: 80px;
+            width: 80px;
+            margin: 3px;
+            background: #fff;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00d0ff;
+            font-size: 1.8em;
+            font-weight: 600;
+        }
+        .result
+        {
+            padding: 10px;
+            border-radius: 5px;
+            background: #fff;
+            max-width: 300px;
+            width: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%,-50%) scale(0.9);
+        }
+        .result.active
+        {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%,-50%) scale(1);
+            transition: 0.5s;
+        }
+        .result .wonText
+        {
+            font-size: 1.5em;
+            font-weight: 600;
+            display: flex;
+        }
+        .result .wonText p
+        {
+            font-weight: 600;
+            margin: 0 5px;
+        }
+        .result .btn
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .result .btn button
+        {
+            font-size: 18px;
+            font-weight: 800;
+            padding: 10px 0;
+            border: none;
+            outline: none;
+            background: #00d0ff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all ease 0.2s;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Select Box -->
+
+    <div class="select">
+        <header>Tic Tac Toe</header>
+        <div class="content">
+            <div class="title">Select which you want to be ?</div>
+            <div class="option">
+                <button class="playerX">Player (X)</button>
+                <button class="playerO">Player (O)</button>
+            </div>
+        </div>
+    </div>
+    <!-- Playboard section -->
+
+    <div class="playBoard">
+        <div class="details">
+            <div class="players">
+                <span class="Xturn">X turn</span>
+                <span class="Oturn">O turn</span>
+                <div class="slider"></div>
+
+            </div>
+        </div>
+        <div class="playArea">
+            <section>
+                <span class="box1"></span>
+                <span class="box2"></span>
+                <span class="box3"></span>
+            </section>
+            <section>
+                <span class="box4"></span>
+                <span class="box5"></span>
+                <span class="box6"></span>
+            </section>
+            <section>
+                <span class="box7"></span>
+                <span class="box8"></span>
+                <span class="box9"></span>
+            </section>
+        </div>
+    </div>
+    <!-- Result box -->
+
+    <div class="result">
+        <div class="wonText"></div>
+        <div class="btn">
+            <button>Replay</button>
+        </div>
+    </div>
+
+    <script>
+        const selectBox = document.querySelector(".select");
+        selectXBtn = selectBox.querySelector(".playerX"),
+        selectOBtn = selectBox.querySelector(".playerO");
+        playBar = document.querySelector(".playBoard");
+        allBox = document.querySelectorAll("section span");
+        players = document.querySelector(".players");
+        result = document.querySelector(".result");
+        wonText = result.querySelector(".wonText");
+        replaybtn = result.querySelector("button");
+
+        window.onload = ()=>
+        {
+            for(let i = 0; i < allBox.length; i++)
+            {
+                allBox[i].setAttribute("onclick","clickBox(this)");
+            }
+            selectXBtn.onclick = () =>
+            {
+                selectBox.classList.add("active"); // hide the Select box by PlayerX button clicked
+                playBar.classList.add("active"); // show the playerboard section on the playerX button clicked
+            }
+            selectOBtn.onclick = () =>
+            {
+                selectBox.classList.add("active"); // hide the Select box by PlayerX button clicked
+                playBar.classList.add("active"); // show the playerboard section on the playerX button clicked
+                players.setAttribute("class", "players active player");// adding three class name in player element
+            }
+        }
+
+        let playerXIcon = "fa fa-times";
+        let playerOIcon = "fa fa-circle-thin";
+        let playerSign = "X"; // suppose player will be X
+        let runBot = true;
+
+        // User Select Function
+        function clickBox(element)
+        {
+            // console.log(element);
+            if(players.classList.contains("player"))
+            {
+                // if player will will select another option then th sign change to another sign
+                element.innerHTML = `<i class="${playerOIcon}"></i>`; // adding the icon inside the element where the user clicked
+                players.classList.add("active");
+                playerSign = "O";
+                element.setAttribute("id",playerSign);
+            }
+            else
+            {
+                element.innerHTML = `<i class="${playerXIcon}"></i>`; // adding the icon inside the element where the user clicked
+                players.classList.add("active");
+                element.setAttribute("id",playerSign);
+            }
+            selectWinner();// calling the winner function
+            playBar.style.pointerEvents = "none";
+            element.style.pointerEvents = "none"; // if user select any box it can't be selected again
+            let randomDelayTime = ((Math.random() * 1000) + 200).toFixed();// this will generate the random time dealt taken by the bots
+            // console.log("Time Delayed by the bot " +randomDelayTime+ "milisecond, now it's bot's turn to place their sign");
+            setTimeout(()=>
+            {
+                bot(runBot);
+            },randomDelayTime);
+        }
+        // Bot Select Function
+        function bot(runBot)
+        {
+            if(runBot)
+            {
+                playerSign = "O";
+                let array = [];// creating the empty array so we can store the unselected box index in this array
+                for(let i = 0; i < allBox.length; i++)
+                {
+                    if(allBox[i].childElementCount == 0)
+                    {
+                        array.push(i); // inserting the unselected boxes inside the array means span has no childen
+                        // console.log(i + " " + " has no children")
+                    }
+                }
+                let random = array[Math.floor(Math.random() * array.length)];// getting the random index so bot will select the random index
+                console.log(random);
+                if(array.length > 0)
+                {
+                    if(players.classList.contains("player"))
+                    {
+                        allBox[random].innerHTML = `<i class="${playerXIcon}"></i>`; // adding the icon inside the element where the user clicked
+                        players.classList.remove("active");
+                        playerSign = "X";
+                        allBox[random].setAttribute("id",playerSign);
+                    }
+                    else
+                    {
+                        allBox[random].innerHTML = `<i class="${playerOIcon}"></i>`; // adding the icon inside the element where the user clicked
+                        players.classList.remove("active");
+                        allBox[random].setAttribute("id",playerSign);
+                    }
+                selectWinner();// calling the winner function
+
+                }
+                allBox[random].style.pointerEvents = "none"; // with this user can't select at the selected area where the bot has taken the place 
+                playBar.style.pointerEvents = "auto";
+                playerSign = "X";// passing  the value of the X the pointer event will run to chnage the Sign
+                }
+        }
+
+        function getClass(idName)
+        {
+            return document.querySelector(".box" + idName).id; // returning the ID name
+        }
+
+        function checkClass(val1,val2,val3,sign)
+        {
+            if(getClass(val1) == sign && getClass(val2) == sign && getClass(val3) == sign)
+            {
+                return true;
+            }
+        }
+
+        function selectWinner()// if any of the condition matched the the winner will be selected 
+        {
+            if((checkClass(1,4,7,playerSign)) || (checkClass(1,2,3,playerSign))  || (checkClass(4,5,6,playerSign)) || (checkClass(7,8,9,playerSign)) || (checkClass(2,5,8,playerSign)) || (checkClass(3,6,9,playerSign)) || (checkClass(1,5,9,playerSign)) || (checkClass(3,5,7,playerSign)))
+            {
+                console.log(playerSign + " " + "is the winner");
+                runBot = false;
+                bot(runBot);
+                setTimeout(()=>
+                {   
+                    playBar.classList.remove("active");
+                    result.classList.add("active");
+                },700); // 700 milisecond delay in the showing of the result
+                wonText.innerHTML = `player <p>${playerSign}</p> won the Game`;
+            }
+            else
+            {
+                // if match has drawn
+                // first we will check all id... if all span has id and no one won the game then we will declared it as a draw
+                if( getClass(1) != "" && getClass(2) != "" && getClass(3) != "" && getClass(4) != "" && getClass(5) != "" && getClass(6) != "" && getClass(7) != "" && getClass(8) != "" && getClass(9) != "" )
+                {
+                    runBot = false;
+                    setTimeout(()=>
+                    {   
+                        playBar.classList.remove("active");
+                        result.classList.add("active");
+                    },700); // 700 milisecond delay in the showing of the result
+                    wonText.textContent = `Match has been drawn`;
+                    
+                }
+            }
+        }
+        replaybtn.onclick = ()=>
+        {
+            window.location.reload();// reload upto the current page
+        }
+    </script>
+</body>
+</html>
