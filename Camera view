@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 3D Animation</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #111;
+        }
+        .box
+        {
+            position: absolute;
+            top: 25%;
+            left: 25%;
+            transform: perspective(500px) rotateX(60deg);
+        }
+        .square
+        {
+            position: absolute;
+            width: 1800px;
+            height: 1800px;
+            background: transparent;
+            border: 100px solid #000;
+            transform-style: preserve-3d;
+            box-sizing: border-box;
+            box-shadow: 0 0 0 5px #fff,inset 0 0 0 5px #fff;
+            animation: rotate 40s linear infinite;
+        }
+        .square::before
+        {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            bottom: -50px;
+            right: -50px;
+            border: 6px dashed #fff;
+        }
+        @keyframes rotate 
+        {
+            0%
+            {
+                transform: rotate(360deg);
+            }    
+            100%
+            {
+                transform: rotate(0);
+            }
+        }
+        .square span
+        {
+            position: absolute;
+            display: block;
+            transform: scale(0);
+            width: calc(100% + 150px);
+            height: 8px;
+        }
+        .square span:nth-child(1)
+        {
+            top: -80px;
+            left: -74px;
+            background: linear-gradient(180deg,#f00,#ff0);
+            animation: animate 40s linear infinite;
+            height: calc(100% + 150px);
+            width: 8px;
+            transform-origin: bottom;
+            animation-delay: 30s;
+        }
+        .square span:nth-child(3)
+        {
+            top: -80px;
+            height: initial;
+            right: -75px;
+            background: linear-gradient(0deg,#ff0,#f00);
+            animation: animate 40s linear infinite;
+            height: calc(100% + 150px);
+            width: 8px;
+            transform-origin: top;
+            animation-delay: 10s;
+        }
+        @keyframes animate 
+        {
+            0%,75%,100%
+            {
+                transform: scaleY(0);
+            }    
+            25%,50%
+            {
+                transform: scaleY(1);
+            }
+        }
+        .square span:nth-child(2)
+        {
+
+            top: -80px;
+            right: -75px;
+            background: linear-gradient(90deg,#ff0,#f00);
+            animation: animate1 40s linear infinite;
+            transform-origin: left;
+        }
+        .square span:nth-child(4)
+        {
+
+            top: initial;
+            left: -75px;
+            bottom: -78px;
+            background: linear-gradient(270deg,#ff0,#f00);
+            animation: animate1 40s linear infinite;
+            transform-origin: right;
+            animation-delay: 20s;
+        }
+        @keyframes animate1 
+        {
+            0%,75%,100%
+            {
+                transform: scaleX(0);
+            }  
+            25%,50%
+            {
+                transform: scaleX(1);
+            }  
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="square">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</body>
+</html>
