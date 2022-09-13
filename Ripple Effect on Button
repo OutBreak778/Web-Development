@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripple Button Effect | Javascript</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+        }
+        a
+        {
+            position: relative;
+            display: inline-block;
+            padding: 12px 36px;
+            margin: 10px 5px;
+            font-size: 2em;
+            overflow: hidden;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            /* box-shadow:  0 3px 10px rgba(255, 255, 252, 0.11),
+                          5px 15px 30px rgba(255,255,255,1);
+            in box-shadow the first element it take as the border-width
+            in box-shadow the second element it take the shadow of left or right direction
+            in box-shadow the third element it take the  shadow of top and bottom direction
+            in box-shadow the fourth element take the shadow of the opacity power;  */
+            letter-spacing: 2px;
+            border-radius: 40px;
+            background: linear-gradient(45deg,#0162c8,#55e7fc);
+        }
+        a:nth-child(2)
+        {
+            background: linear-gradient(90deg,#502dec,#ff72e0);
+        }
+        span
+        {
+            position: absolute;
+            background: #fff;
+            transform: translate(-50%,-50%);
+            pointer-events: none;
+            border-radius: 50%;
+            animation: animate 1s linear infinite;
+        }
+        @keyframes animate
+        {
+            0%
+            {
+                width: 0px;
+                height: 0px;
+                opacity: 0.3;
+            }
+            100%
+            {
+                width: 500px;
+                height: 500px;
+                opacity: 0.3;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#">Button</a>
+    <a href="#">Button</a>
+    
+    <!-- ripple's script is too long and it is hard to understand but it use a function of addEventListener  -->
+
+    <script>
+        const buttons = document.querySelectorAll('a');
+        buttons.forEach(btn=>
+        {
+            btn.addEventListener('click',function(e)
+            {
+                let x = e.clientX - e.target.offsetLeft;
+                let y = e.clientY - e.target.offsetTop;
+
+                let ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+
+                this.appendChild(ripples);
+
+                setTimeout(() =>
+                {
+                    ripples.remove()
+                },1000);
+            })
+        })
+    </script>
+</body>
+</html>
