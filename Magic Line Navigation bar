@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Menu Indicator</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        nav
+        {
+            position: relative;
+            display: flex;
+        }
+        nav a
+        {
+            position: relative;
+            margin: 0 15px;
+            font-size: 1.3em;
+            text-decoration: none;
+            color: #000;
+        }
+        nav #marker
+        {
+            position: absolute;
+            height: 4px;
+            width: 100%;
+            bottom: -10px;
+            transition: 0.4s;
+            border-radius: 10px;
+            left: 0;
+            background: #000;
+        } 
+    </style>
+</head>
+<body>
+    <nav>
+        <div id="marker"></div>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">PortFolio</a>
+        <a href="#">Teams</a>
+        <a href="#">Contact</a>
+    </nav>
+    <script>
+        var marker = document.querySelector('#marker');
+        var item = document.querySelectorAll('nav a');
+        function indicator (e)
+        {
+            marker.style.left = e.offsetLeft+"px";
+            marker.style.width = e.offsetWidth+"px";
+        }
+        item.forEach(link=>
+        {
+            link.addEventListener('click',(e)=>
+            {
+                indicator(e.target);
+            })
+        })
+    </script>
+</body>
+</html>
