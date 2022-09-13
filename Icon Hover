@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Creative Icon Hover</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+        :root
+        {
+            --bg: #222;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--bg);
+        }
+        ul
+        {
+            position: relative;
+            display: flex;
+            gap: 50px;
+        }
+        ul li 
+        {
+            position: relative;
+            list-style: none;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        ul li:hover
+        {
+            z-index: 10000;
+            transform: scale(0.75);
+        }
+        ul li::before
+        {
+            content: '';
+            position: absolute;
+            inset: 20px;
+            box-shadow: 0 0 0 10px var(--clr), 0 0 0 10px var(--bg),0 0 0 12px var(--clr);
+            transition: 0.5s;
+        }
+        ul li:hover::before
+        {
+            inset: 0;
+        }
+        ul li::after
+        {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--bg);
+            transform: rotate(45deg);
+        }
+        ul li a
+        {
+            position: relative;
+            text-decoration: none;
+            color: var(--clr);
+            z-index: 10;
+            font-size: 2em;
+            transition: 0.5s;
+        }
+        ul li:hover a
+        {
+            font-size: 3em;
+            filter: drop-shadow(0 0 20px var(--clr)) drop-shadow(0 0 40px var(--clr)) drop-shadow(0 0 60px var(--clr));
+        }
+
+    </style>
+</head>
+<body>
+    <ul>
+        <li style="--clr:#4fc3dc;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:logo-facebook" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--clr:#f00;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:logo-youtube" data-width="32"></span>
+
+            </a>
+        </li>
+        <li style="--clr:#d83232;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:logo-instagram" data-width="32"></span>
+
+            </a>
+        </li>
+        <li style="--clr:rgba(0, 255, 0, 0.678);">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:logo-whatsapp" data-width="32"></span>
+
+            </a>
+        </li>
+    </ul>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+</body>
+</html>
