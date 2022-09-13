@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Responsive Website Design</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .banner
+        {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: #3475ca;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .banner img
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+        }
+        .banner .content
+        {
+            position: relative;
+            max-width: 750px;
+            text-align: center;
+        }
+        .banner .content h2
+        {
+            color: #fff;
+            font-size: 60px;
+        }
+        .banner .content p
+        {
+            color: #fff;
+            font-size: 18px; 
+        }
+        .banner header
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10000;
+        }
+        .banner header .logo
+        {
+            color: #fff;
+            text-decoration: none;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .banner header .toggle
+        {
+            position: relative;
+            width: 36px;
+            height: 31px;
+            background: url(menu.png);
+            background-size: cover;
+            cursor: pointer;
+        }
+         .banner .toggle
+        {
+            position: relative;
+            width: 30px;
+            height: 10px;
+        }
+        .banner .set 
+        {
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-left: -10px;
+            margin-top: 50px;
+            /* background: #ffff; */
+            width: fit-content;
+            transition: 0.5s;
+        }
+        .banner header .set li 
+        {
+            position: relative;
+            margin: 0 -5px;
+            list-style: none;
+            line-height: 55px;
+            font-size: 20px;
+        }
+        .banner header .set li a
+        {
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.2em;
+        }
+        .banner header .set.active
+        {
+            opacity: 1;
+            transition-delay: calc(0.3s * var(--i));
+        }
+        .about
+        {
+            position: relative;
+            width: 100%;
+            display: flex;
+        }
+        .about .contentBox
+        {
+            background: #162c3b;
+            padding: 100px;
+            width: 50%;
+        }
+        .heading
+        {
+            color: #fff;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .text
+        {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-align: center;
+            
+        }
+        .about .imgBox
+        {
+            background: url(img2.jpg);
+            background-size: cover;
+            width: 50%;
+            background-position: center;
+        }
+        .container .servicesBox img
+        {
+            width: 100px;
+            height: 100px;
+            color: #000;
+        }
+
+        .services
+        {
+            background: #12222d;
+            padding: 100px;
+            text-align: center;
+        }
+        .services .container
+        {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+        .services .container .servicesBox
+        {
+            position: relative;
+            background: #fff;
+            width: 350px;
+            height: 400px;
+            display: flex;
+            /* margin: 30px; */
+            justify-content: center;
+            align-items: center;
+        }
+        .services .container .servicesBox img
+        {
+            max-width: 100px;
+        }
+        .services .container .servicesBox h2
+        {
+            font-weight: 500;
+            font-size: 20px;
+            letter-spacing: 1px;
+        }
+        .technology
+        {
+            background: #3f8ffc;
+            width: 100%;
+            padding: 100px;
+            padding-top: 300px;
+            margin-top: -300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+        .technology .contentBox
+        {
+            max-width: 800px;
+        }
+        .technology .imgBox
+        {
+            max-width: 250px;
+        }
+        .technology .imgBox img
+        {
+            max-width: 100%;
+            width: 500px;
+            height: 300px;
+        }
+        .client
+        {
+            background: #162c3b;
+            padding: 100px;
+            text-align: center;
+        }
+        .client .cbox
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .client .cbox a
+        {
+            font-size: 2.3em;
+            color: #fff;
+            opacity: 0.35;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .client .cbox a:hover
+        {
+            opacity: 1;
+        }
+        .testimonials
+        {
+            position: relative;
+            padding: 100px;
+            background: #12222d;
+            text-align: center;
+        }
+        .testimonials .container
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        .testimonials .container .contentBox
+        {
+            background: #fff;
+            padding: 50px;
+            width: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+        }
+        .testimonials .container .contentBox p
+        {
+            font-family: italic;
+        }
+        .testimonials .container .contentBox h3
+        {
+            width: 100%;
+            text-align: end;
+            font-weight: 500;
+            color: #0066ff;
+        }
+        .contact 
+        {
+            padding: 100px;
+            background: #162c3b;
+            text-align: center;
+        }
+        .imgbox2
+        {
+            background: url(evening.jpg);
+            background-position: center;
+            background-size: cover;
+            width: 50%;
+        }
+        .redbag
+        {
+            background: #e71d1d !important;
+            background-size: cover;
+            background-position: center;
+        }
+        .form .inputbox
+        {
+            margin-bottom: 40px;
+        }
+        .form .inputbox input
+        {
+            width: 100%;
+            background: transparent;
+            box-shadow: none;
+            border: none;
+            outline: none;
+            padding: 10px 0;
+            font-size: 18px;
+            color: #fff;
+            font-weight: 500;
+            border-bottom: 2px solid #fff;
+        }
+        .form .inputbox input::placeholder
+        {
+            color: #fff;
+        }
+        .form .inputbox textarea
+        {
+            width: 100%;
+            background: transparent;
+            box-shadow: none;
+            border: none;
+            outline: none;
+            padding: 10px 0;
+            font-size: 18px;
+            min-height: 150px;
+            color: #fff;
+            font-weight: 500;
+            border-bottom: 2px solid #fff;
+        }
+        .form .inputbox textarea::placeholder
+        {
+            color: #fff;
+        }
+        .form .inputbox input[type="submit"]
+        {
+            width: 150px;
+            background: #fff;
+            color: #111;
+            cursor: pointer;
+            font-weight: 400;
+        }
+        .footer
+        {
+            background: #162c3b;
+            padding: 20px 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer ul
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer ul li
+        {
+            list-style: none;
+        }
+        .footer ul li .iconify
+        {
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 10px;
+
+        }
+        .footer ul li .iconify img
+        {
+            filter: invert(100%);
+            max-width: 50px;
+            height: 50px;
+
+        }
+        @media (max-width: 850px)
+        {
+            .banner header 
+            {
+                padding: 20px 50px;
+            }
+            .banner .content h2
+            {
+                font-size: 36px;
+            }
+            .banner .content p
+            {
+                font-size: 16px;
+            }
+            .about
+            {
+                flex-direction: column;
+            }
+            .about .contentBox,
+            .about .imgBox
+            {
+                width: 100%;
+                padding: 50px;
+                min-height: 400px;
+                text-align: center;
+            }
+            .services
+            {
+                padding: 50px;
+            }
+            .services .container 
+            {
+                justify-content: center;
+                margin-top: 20px;
+            }
+            .services .container .servicesBox
+            {
+                margin: 20px;
+                width: 300px;
+                height: 350px;
+            }
+            .technology
+            {
+                padding: 50px;
+                padding-top: 300px;
+                justify-content: center;
+                flex-direction: column;
+            }
+            .technology .imgBox
+            {
+                margin-top: 40px;
+                max-width: 250px;
+            }
+            .client
+            {
+                padding: 50px;
+            }
+            .client .imgBox
+            {
+                justify-content: center;
+            }
+            .testimonials
+            {
+                padding: 50px;
+            }
+            .testimonials .contentBox
+            {
+                padding: 60px 40px;
+                max-width: 550px;
+                margin-bottom: 40px;
+            }
+            .testimonials .contentBox:last-child
+            {
+                margin-bottom: 0px;
+            }
+            .contact
+            {
+                padding: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- banner -->
+    <div class="banner">
+        <header>
+            <a class="logo" href="#">Brand Name</a>
+            <div class="toggle">
+                <ul class="set">
+                    <li><a href="#" style="--i:1">Home</a></li>
+                    <li><a href="#" style="--i:2">Profile</a></li>
+                    <li><a href="#" style="--i:3">PortFolio</a></li>
+                    <li><a href="#" style="--i:4">About</a></li>
+                    <li><a href="#" style="--i:5">Setting</a></li>
+                </ul>
+            </div>
+        </header>
+        <img src="pexels2.jpg" alt="">
+        <div class="content">
+            <h2>Success By Design</h2>
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid quasi expedita, similique delectus molestiae qui alias eveniet deleniti consectetur numquam libero, rem adipisci voluptatibus commodi vitae ut illum magni sed harum? Mollitia in laboribus quos in, consequatur maiores praesentium autem dolores totam fugiat dolore repellendus ut? Quibusdam quaerat vel repellendus, vero iusto natus at maxime totam eveniet quidem iure in cupiditate.</p>
+        </div>
+    </div>
+
+    <!-- about -->
+    <section class="about">
+        <div class="contentBox">
+            <h2 class="heading">About us</h2>
+            <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla soluta quod eius nihil sapiente esse, atque ea doloribus voluptatibus pariatur nemo distinctio accusamus aliquam quis enim deleniti, laborum error quidem alias incidunt harum. Reprehenderit ipsa, ex deserunt, nihil fuga dolores quas quisquam maxime, hic soluta eligendi magni sit voluptatibus dignissimos?Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea numquam ipsam reiciendis distinctio eligendi reprehenderit illum neque, nihil tenetur nostrum, quo praesentium quasi, iure veritatis? <br><br> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum deserunt sint reprehenderit ipsa quo suscipit a quos dolorem architecto blanditiis molestiae quibusdam nostrum earum recusandae, exercitationem temporibus nihil maiores harum! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti, earum! </p>
+        </div>
+        <div class="imgBox"></div>
+    </section>
+
+    <!-- Services -->
+    <div class="services">
+        <h2 class="heading">Our Services</h2>
+        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quo quibusdam porro placeat exercitationem, impedit, minima tempore at quia ipsum qui dolores doloribus facere debitis similique pariatur eum, voluptas ex corrupti unde. Rem impedit hic, maiores quo ea neque beatae molestiae. Voluptates expedita sed molestias laborum unde distinctio praesentium officia.</p>
+        <div class="container">
+            <div class="servicesBox">
+                <div>
+                    <img src="settings.png" alt="">
+                    <h2>Design</h2>
+                </div>
+            </div>
+            <div class="servicesBox">
+                <div>
+                    <img src="worldweb.png" alt="">
+                    <h2>Development</h2>
+                </div>
+            </div>
+            <div class="servicesBox">
+                <div>
+                    <img src="box.png" alt="">
+                    <h2>Branding</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+        
+    <!-- Technology -->
+    <section class="technology">
+        <div class="contentBox">
+            <h2 class="heading">We use edge Scenery for Location</h2>
+            <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint non libero iure! Assumenda nemo iste eveniet quaequos voluptate quo.
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Excepturi, placeat magnam nihil consectetur libero officiis harum tenetur natus facere voluptate eum beatae, nisi dignissimos quidem alias, vero unde repellendus velit quod laboriosam culpa. Repellat, in corrupti suscipit incidunt ducimus nam.
+            </p>
+        </div>
+        <div class="imgBox">
+            <img src="scenery.jpg" alt="">
+        </div>
+    </section>
+
+    <!-- Client -->
+    <section class="client">
+        <h2 class="heading">Our Client</h2>
+        <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium quibusdam est vero libero sunt inventore aliquam laudantium magni et consequuntur? Excepturi aperiam vero saepe eveniet expedita impedit animi iure sed error labore consequuntur non perspiciatis, exercitationem inventore accusamus, odio obcaecati? Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium iste, perspiciatis assumenda dolores vitae perferendis hic cum nisi consequuntur pariatur.</p>
+        <div class="cbox">
+            <a href="www.google.com">Google</a>
+            <a href="www.Twitter.com">Twitter</a>
+            <a href="www.Instagram.com">Instagram</a>
+            <a href="www.Facebook.com">Facebook</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="heading">What our client says ?</h2>
+        <div class="container">
+            <div class="contentBox">
+                <div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus dolorum ratione dolores corporis obcaecati tempore, facere exercitationem sit. Inventore alias asperiores libero facere saepe cupiditate atque quas iusto ducimus, odit quis earum, error consequuntur animi debitis. Har porro libero omnis quis veniam quos sapiente itaque unde nesciunt impedit optio? Voluptate, perspiciatis hic aliquam modi nobis numquam temporibus! Dicta, laborum magnam! </p><br>
+                    <h3>Someone Famous</h3>
+                </div>
+            </div>
+
+            <div class="contentBox">
+                <div>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus dolorum ratione dolores corporis obcaecati tempore, facere exercitationem sit. Inventore alias asperiores libero facere saepe cupiditate atque quas iusto ducimus, odit quis earum, error consequuntur animi debitis. Har porro libero omnis quis veniam quos sapiente itaque unde nesciunt impedit optio? Voluptate, perspiciatis hic aliquam modi nobis numquam temporibus! Dicta, laborum magnam! </p><br>
+                    <h3>Someone Famous</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- contact -->
+    <section class="contact">
+        <h2 class="heading">Contact Us</h2>
+        <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi nostrum exercitationem voluptatibus ab illo, officiis omnis minima molestias aspernatur tempore explicabo, modi praesentium accusamus repudiandae ipsa dolore similique sit laborum! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsa quo ea at soluta error voluptate eum libero suscipit inventore praesentium! Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet dolorum voluptatem ullam? Totam dolore similique molestias, nulla hic omnis accusamus.</p>
+    </section>
+        <section class="about">
+        <div class="contentBox redbag">
+            <div class="form">
+                <div class="inputbox">
+                    <input type="text" placeholder="Enter Full Name">
+                </div>
+                <div class="inputbox">
+                    <input type="email" placeholder="Email Address">
+                </div>
+                <div class="inputbox">
+                    <input type="number" placeholder="Mobile number">
+                </div>
+                <div class="inputbox">
+                    <textarea placeholder="Write Your message here"></textarea>
+                </div>
+                <div class="inputbox">
+                    <input type="submit" value="Send">
+                </div>
+            </div>
+        </div>
+        <div class="imgbox2"></div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer">
+        <p class="text">Design & Development</p>
+        <p class="text"> Check the website by </p>
+        <ul>
+            <li><span class="iconify" data-height="28" data-icon="ion:logo-instagram" data-width="28" style="color: #d62b50;"></span>
+            </li>
+            <li><span class="iconify" data-height="28" data-icon="ion:logo-youtube" data-width="28" style="color: red;"></span>
+            </li>
+            <li><span class="iconify" data-height="28" data-icon="ion:logo-twitter" data-width="28" style="color: #4fc;"></span>
+            </li>
+        </ul>
+    </section>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+    <script>
+        let toggle = document.querySelector('.toggle');
+        let set = document.querySelector('.set');
+        toggle.onclick = function ()
+        {
+            set.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
