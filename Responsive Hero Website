@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Website | javascript</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            user-select: none;
+        }
+        body
+        {
+            overflow: hidden;
+        }
+        section
+        {
+            padding: 100px;
+            height: 100vh;
+        }
+        header
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+        header .logo
+        {
+            position: relative;
+            font-size: 28px;
+            color: #000;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            animation: slideLeft 0.5s ease-in-out forwards;
+        }
+        header .toggle
+        {
+            position: relative;
+            width: 30px;
+            height: 30px;
+            background: url(menu.png) no-repeat;
+            background-size: 30px;
+            background-position: center;
+            cursor: pointer;
+            z-index: 10000;
+            transition: 0.3s;
+            animation: slideRight 0.5s ease-in-out forwards;
+            animation-delay: 0.6s;
+            opacity: 0;
+        }
+
+        header .toggle.active
+        {
+            background: url(close.png) no-repeat;
+            background-size: 30px;
+            background-position: center;
+            cursor: pointer;
+        }
+        header .navigation
+        {
+            position: absolute;
+            display: flex;
+            right: 150px;
+            opacity: 0;
+            visibility: 0.4;
+            transition: 0.5s;
+        }
+        .navigation li
+        {
+            list-style: none;
+        }
+        .navigation li a
+        {
+            color: #000;
+            text-decoration: none;
+            font-size: 1em;
+            font-weight: 600;
+            margin: 0 20px;
+            display: inline-block;
+            opacity: 0;
+            transition: 0.5s;
+        }
+        .navigation.active li a
+        {
+            animation: slideRight 0.5s ease-in-out forwards;
+            animation-delay: calc(0.2s * var(--i));
+        }
+        .navigation.active
+        {
+            opacity: 1;
+            visibility: visible;
+        }
+        .container
+        {
+            position: absolute;
+            display: flex;
+            height: calc(100% - 200px);
+            width: calc(100% - 200px);
+            z-index: 100;
+        }
+        .container .box
+        {
+            position: relative;
+            width: 25%;
+            height: 100%;
+            overflow: hidden;
+            border-right: 10px solid #fff;
+            
+        }
+        .container .box:last-child
+        {
+            border-right: none;
+        }
+        .container .box .imgbox
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: 0.5s;
+            opacity: 0;
+            animation: slideRight 0.6s ease-in-out forwards;
+            animation-delay: calc(0.3s * var(--i));
+        }
+        .container .box .imgbox.active
+        {
+            position: fixed;
+            top: 100px;
+            left: 100px;
+            width: calc(100% - 200px);
+            height: calc(100% - 200px);
+            z-index: 1000;
+        }
+        .container .box .imgbox img
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .container .box .imgbox:hover img
+        {
+            transform: scale(1.2);
+        }
+        .container .box .imgbox.active:hover img
+        {
+            transform: scale(1);
+        }
+        .footer
+        {
+            position: absolute;
+            bottom: -80px;
+            left: 0;
+            width: 100%;
+            padding: 0 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer .sci
+        {
+            position: relative;
+            display: flex;
+            
+        }
+        .footer .sci li
+        {
+            list-style: none;
+        }
+        .footer .sci li a 
+        {
+            opacity: 0;
+            animation: slideRight 0.6s ease-in-out forwards;
+            animation-delay: calc(0.3s * var(--i));
+            color: #000;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: column;
+            display: flex;
+            flex-direction: column;
+        }
+        .footer .copyright
+        {
+            display: flex;
+            flex-direction: column;
+            width: 150px;
+            text-align: center;
+        }
+        .footer .copyright .iconify
+        {
+            margin-left: 56px;
+            margin-bottom: 3px;
+        }
+        .footer .sci li a .iconify
+        {
+            margin-left: 16px;
+            margin-bottom: 3px;
+        } 
+        .footer .sci:last-child
+        {
+            margin-right: 0;
+        }
+        .copyright
+        {
+            color: #000;
+            opacity: 0;
+            animation: slideRight 0.6s ease-in-out forwards;
+            animation-delay: calc(0.3s * var(--i));
+            font-weight: 600;
+        }
+        @keyframes slideRight 
+        {
+            0%
+            {
+                transform: translateX(150px);
+                opacity: 0;
+            }    
+            100%
+            {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @keyframes slideLeft
+        {
+            0%
+            {
+                transform: translateX(-150px);
+                opacity: 0;
+            }    
+            100%
+            {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        @media (max-width: 770px)
+        {
+            section
+            {
+                padding: 80px 20px;
+            }
+            header 
+            {
+                padding: 10px 20px;
+                height: 70px;
+            }
+            .navigation.active
+            {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+            .navigation.active li a
+            {
+                margin: 5px 10px;
+                display: inline-block;
+                letter-spacing: 1px;
+                font-size: 20px;
+            }
+            .container
+            {
+                flex-direction: column;
+                flex-wrap: wrap;
+                width: calc(100% - 30px);
+                height: calc(100% - 170px);
+            }
+            .container .box
+            {
+                width: 100%;
+                height: 25%;
+                border-bottom: 10px solid #fff;
+            }
+            .container .box:last-child
+            {
+                border-right: 10px solid #fff;
+            }
+            .container.box .imgbox.active img
+            {
+                top: 70px;
+                left: 20px;
+                width:  calc(100% - 40px);
+                height: calc(100% - 160px);
+            }
+            .footer
+            {
+                width: 100%;
+                padding: 0 20px;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .footer .sci
+            {
+                top: 30px;
+                left: 0;
+                display: flex;
+                flex-direction: row;
+                font-size: 10px;
+                right: 0;
+            }
+            .footer .sci .iconify
+            {
+                height: 30px;
+                width: 30px;
+            }
+            .footer .sci .copyright
+            {
+                top: -300px;
+                right: 0;
+            }
+            .footer .sci .copyright .iconify
+            {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <header>
+            <a href="#" class="logo">Heroes</a>
+            <div class="toggle" onclick="toggleMenu();"></div>
+            <ul class="navigation" onclick="toggleMenu();">
+                <li><a href="#" style="--i:1">Home</a></li>
+                <li><a href="#" style="--i:2">Character</a></li>
+                <li><a href="#" style="--i:3">Movies</a></li>
+                <li><a href="#" style="--i:4">Games</a></li>
+                <li><a href="#" style="--i:5">Setting</a></li>
+                <li><a href="#" style="--i:6">More</a></li>
+            </ul>
+        </header>
+        <div class="container">
+            <div class="box" style="--i:3;">
+                <div class="imgbox">
+                    <img src="img1.jpg" alt="">
+                </div>
+            </div>
+            <div class="box" style="--i:4;">
+                <div class="imgbox">
+                    <img src="img2.jpg" alt="">
+                </div>
+            </div>
+            <div class="box" style="--i:5;">
+                <div class="imgbox">
+                    <img src="img3.jpg" alt="">
+                </div>
+            </div>
+            <div class="box" style="--i:6;">
+                <div class="imgbox">
+                    <img src="img4.jpg" alt="">
+                </div>
+            </div>
+
+            <div class="footer">
+                <ul class="sci">
+                    <li><a href="#" style="--i:7"><span class="iconify" data-height="28" data-icon="ion:logo-twitter" data-width="28" style="color: #4fc3dc;"></span>
+                    Youtube</a></li>
+                    <li><a href="#" style="--i:8"><span class="iconify" data-height="28" data-icon="ion:logo-youtube" data-width="28" style="color: red;"></span>
+                    Twitter</a></li>
+                    <li><a href="#" style="--i:9"><span class="iconify" data-height="28" data-icon="ion:logo-instagram" data-width="28" style="color: #eb0839;"></span>
+                    Instagram</a></li>
+                </ul>
+                <p class="copyright" style="--i:10"><span class="iconify" data-height="35" data-icon="logos:octodns" data-width="35"></span>Nikhil productions group</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+
+        let imgbox = document.querySelectorAll('.imgbox');
+        imgbox.forEach(popup => popup.addEventListener('click',()=>
+        {
+            popup.classList.toggle('active');
+        }));
+
+        function toggleMenu()
+        {
+            const menuToggle = document.querySelector('.toggle');
+            const navigation = document.querySelector('.navigation');
+            menuToggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+        }
+    </script>
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+</body>
+</html>
