@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saving As Text Files</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Balsamiq+Sans:ital@0;1&family=PT+Sans:ital@1&family=Poppins:wght@300&family=Varela+Round&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #14a288;
+            min-height: 100vh;
+        }
+        .wrapper
+        {
+            width: 450px;
+            border-radius: 7px;
+            background: #fff;
+            padding: 30px 25px 40px;
+        }
+        .wrapper :where(textarea, input, select, button)
+        {
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+        }
+        .wrapper textarea
+        {
+            height: 270px;
+            resize: none;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+        }
+        .wrapper .fileOption
+        {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .fileOption .option
+        {
+            width: calc(100% / 2 - 10px);
+        }
+        .fileOption input
+        {
+            padding: 0 10px;
+        }
+        .option :where(input, .selectMenu)
+        {
+            height: 50px;
+            border: 1px solid #bfbfbf;
+            padding: 0 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .option .selectMenu select
+        {
+            height: 50px;
+        }
+        .wrapper .saveBtn
+        {
+            margin-top: 20px;
+            padding: 15px 0;
+            color: #fff;
+            font-size: 1.3em;
+            background: #17a288;
+            cursor: pointer;
+            opacity: 0.6;
+            pointer-events: none;
+            font-weight: 500;
+        }
+        .wrapper textarea:valid ~ .saveBtn
+        {
+            opacity: 1;
+            pointer-events: none;
+        }
+        .wrapper p
+        {
+            font-size: 1.4em;
+            color: #f00;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <textarea required placeholder="Enter Something To Save"></textarea>
+        <div class="fileOption">
+            <div class="option fileName">
+                <label>File Name</label>
+                <input type="text" placeholder="Enter the file name">
+            </div>
+            <div class="option saveAs">
+                <label>Save As</label>
+                <div class="selectMenu">
+                    <select>
+                        <option value="text/plain">Text File (.txt)</option>
+                        <option value="text/javascript">JS File (.js)</option>
+                        <option value="text/html">HTML File (.html)</option>
+                        <option value="image/svg+xml">SVG File (.svg)</option>
+                        <option value="application/msword">DOC File (.doc)</option>
+                        <option value="application/vnd.ms-powerpoint">PPT File (.ppt)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <button class="saveBtn">Save As Text File</button>
+
+
+
+        <!-- <p>Total Character: <span class="count" onkeyup="countLetter">0</span></p> -->
+    
+    
+    
+    </div>
+
+    <script>
+        const textarea = document.querySelector("textarea"),
+        fileNameInput  = document.querySelector(".fileName input"),
+        selectmenu = document.querySelector(".saveAs select"),
+        savebtn = document.querySelector(".saveBtn");
+        const count = document.querySelector(".count"); 
+
+        selectmenu.addEventListener("change", ()=>
+        {
+            // getting selected option as the text
+            let selectedOption = selectmenu.options[selectmenu.selectedIndex].text;
+            savebtn.innerText = `Save As ${selectedOption.split(" ")[0]} File`;
+            console.log();
+        });
+
+        savebtn.addEventListener("click", ()=>
+        {
+            const blob = new Blob([textarea.value], {type: selectmenu.value})
+            const fileUrl = URL.createObjectURL(blob);
+            const link = document.createElement("a"); // this will create <a> tag 
+            link.download = fileNameInput.value; // passing the filename as download
+            link.href = fileUrl; // passing fileUrl as href value of link
+            link.click(); // by clicking on this link so the file can download
+            console.log(blob);
+        });
+
+
+
+        
+        // if i ever visit this program first i will solve this riddle to make this function work
+
+
+        
+        
+        // function countLetter()
+        // {
+        //     const text = textarea.value;
+        //     const textlength = textarea.value.length;
+        //     count.innerText = `${textlength}`;
+        // } 
+
+
+    </script>
+
+</body>
+</html>
