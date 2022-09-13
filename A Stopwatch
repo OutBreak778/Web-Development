@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StopWatch</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Balsamiq+Sans:ital@0;1&family=PT+Sans:ital@1&family=Poppins:wght@300&family=Varela+Round&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+        }
+        body
+        {
+            font-size: 1.2em;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .outerCircle
+        {
+            position: relative;
+            width: 310px;
+            height: 310px;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .animation-bg
+        {
+            background: linear-gradient(-45deg, #00d0ff,#ff0, #add404, #ee7752, #e73c7e, #23add5, #23d5ab, #0f0f);
+            background-size: 400% 400%;
+            animation: animate 3s ease infinite;
+        }
+        @keyframes animate
+        {
+            0%
+            {
+                background-position: 0% 50%;
+            }
+            50%
+            {
+                background-position: 100% 50%;
+            }
+            100%
+            {
+                background-position: 0% 50%;
+            }
+        }
+        .innerCircle 
+        {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: #000;
+            color: #fff;
+            display :flex;
+            justify-content: center;
+            align-items: center;
+        } 
+        .text
+        {
+            font-size: 1.5em;
+            font-weight: 400;
+        }
+        .Minute
+        {
+            font-size: 2em;
+        }
+        .Second
+        {
+            font-size: 2em;
+        }
+        .buttonWraper
+        {
+            width: 250px;
+            margin: 25px;
+            display: flex;
+            justify-content: space-around;
+        }
+        .button
+        {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            background: #000;
+            color: #fff;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em
+        }
+        .button:hover
+        {
+            background: #fff;
+            color: #000;
+        }
+        .container .laps .lapItem
+        {
+            margin-bottom: 10px;
+        }
+        .laps
+        {
+            position: relative;
+            width: 300px;
+            height: 250px;
+            overflow: hidden;
+            list-style: none;
+            color: #fff;
+            overflow: auto;
+            margin-top: 30px;
+            padding: 7px; 
+        }
+        .laps::-webkit-scrollbar
+        {
+            display: none;
+        }
+        .lapItem
+        {
+            padding: 10px;
+            width: 250px;
+            text-align: center;
+            border-radius: 55px;
+            border: 3px solid #444;
+        }
+        .number
+        {
+            color: #cccccc;
+        }
+        .timeStamp
+        {
+            display: inline-block;
+            margin-left: 25px;
+        }
+        .clearButton
+        {
+            display: block;
+            position: fixed;
+            z-index: 1000;
+            bottom: -15px;
+            left: 50%;
+            width: 150px;
+            transform: translate(-60%,-55%);
+            padding: 7px 0;
+            border-radius: 50px;
+            background: rgba(255,255,255,1);
+            border: 1px solid #fff;
+            font-size: 0.9em;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .hidden
+        {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="watch">
+            <div class="outerCircle">
+                <div class="innerCircle">
+                    <span class="text Minute">0 :</span>
+                    <span class="text Second">&nbsp; 0 :</span>
+                    <span class="text minSec">&nbsp; 0</span>
+                </div>
+            </div>
+            <div class="buttonWraper">
+                <button class="button reset hidden">Reset</button>
+                <button class="button play">Play</button>
+                <button class="button lap hidden">Laps</button>
+            </div>
+        </div>
+
+        <ul class="laps">
+            <button class="clearButton hidden">Clear All</button>
+        </ul>
+    </div>
+
+    <script>
+        const playButton = document.getElementsByClassName("play")[0];
+        const lapButton = document.getElementsByClassName("lap")[0];
+        const resetButton = document.getElementsByClassName("reset")[0];
+        const clearButton = document.getElementsByClassName("clearButton")[0]
+        const minute = document.getElementsByClassName("Minute")[0];
+        const second = document.getElementsByClassName("Second")[0];
+        const centiSecond = document.getElementsByClassName("minSec")[0];
+        const laps = document.getElementsByClassName("laps")[0];
+        const bg = document.getElementsByClassName("outerCircle")[0];
+
+        let isPlay = false;
+        let secCounter = 0;
+        let centiSec;
+        let centiCounter = 0;
+        let sec;
+        let min;
+        let lapitem = 0;
+        let minCounter = 0;
+        let isReset = false;
+
+        const toggleButton = () =>
+        {
+            lapButton.classList.remove("hidden");
+            resetButton.classList.remove("hidden");
+        }
+
+        const play = () =>
+        {
+            if(!isPlay && !isReset)
+            {
+                playButton.innerHTML = "pause";
+                bg.classList.add("animation-bg");
+                min = setInterval(()=>
+                {
+                    Minute.innerHTML = `${++minCounter} : &nbsp;`;
+                }, 60*1000);
+
+
+                sec = setInterval(()=>
+                {
+                    if(secCounter === 60)
+                    {
+                        secCounter = 0;
+                    }
+                    second.innerHTML = `&nbsp; ${++secCounter} : &nbsp;`;
+                }, 1000);
+
+
+                centiSec = setInterval(()=>
+                {
+                    if(centiCounter === 100)
+                    {
+                        centiCounter = 0;
+                    }
+                    centiSecond.innerText = ` ${++centiCounter}`;
+                }, 10);
+                isPlay = true;
+                isReset = true;
+            }
+            else
+            {
+                playButton.innerHTML = "play";
+                clearInterval(min);
+                clearInterval(sec);
+                clearInterval(centiSec);
+                isPlay = false;
+                isReset = false;
+                bg.classList.remove("animation-bg");
+            }
+            toggleButton();
+        }
+
+        const reset = () =>
+        {
+            isReset = true;
+            play();
+            lapButton.classList.add("hidden");
+            resetButton.classList.add("hidden");
+            second.innerHTML = '0 :';
+            centiSecond.innerHTML = '&nbsp; 0';
+            minute.innerHTML = '0 : ';
+        }
+
+        const lap = ()=>
+        {
+            const li = document.createElement("li");
+            const number  = document.createElement("span");
+            const timestamp = document.createElement("span");
+
+            li.setAttribute("class", "lapItem");
+            number.setAttribute("class", "number");
+            timestamp.setAttribute("class", "timeStamp");
+
+            number.innerText = `#${++lapitem}`;
+            timestamp.innerHTML = `${minCounter} : ${secCounter} : ${centiCounter}`;
+            li.append(number, timestamp);
+            laps.append(li);
+
+            clearButton.classList.remove("hidden");
+
+        }
+
+        const clearAll = ()=>
+        {
+            laps.innerHTML = '';
+            laps.append(clearButton);
+
+            clearButton.classList.add("hidden");
+        }
+        playButton.addEventListener("click", play);
+        resetButton.addEventListener("click", reset);
+        lapButton.addEventListener("click", lap);
+        clearButton.addEventListener("click", clearAll);
+    </script>
+
+</body>
+</html>
