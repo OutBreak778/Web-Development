@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Notification With Progress Bar</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Balsamiq+Sans:ital@0;1&family=PT+Sans:ital@1&family=Poppins:wght@300&family=Varela+Round&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            user-select: none;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f2f2f2;
+        }
+        .toast
+        {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            border-radius: 15px;
+            padding: 20px 35px 20px 35px;
+            background: #fff;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            border-left: 6px solid #4070f4;
+            overflow: hidden;
+            transform: translateX(calc(100% + 30px));
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .toast.active
+        {
+            transform: translateX(0);
+        }
+        .toast .toastContent
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .toastContent .check
+        {
+            height: 35px;
+            width: 35px;
+            background: #4070f4;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .toastContent .message
+        {
+            display: flex;
+            flex-direction: column;
+            margin: 0 20px;
+        }
+        .message .text
+        {
+            font-size: 20px;
+            font-weight: 600;
+            color: #666666;
+        }
+        .message .text-1
+        {
+            color: #000;
+            font-weight: 600;
+        }
+        .toast .close
+        {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 5px;
+            cursor: pointer;
+            opacity: 0.7;
+            user-select: none;
+        }
+        .toast .progress
+        {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: #ddd;
+        }
+        
+        .toast .progress::before
+        {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            background: #4070f4;
+        }
+        .progress.active::before
+        {
+            animation: animate 5s linear forwards;
+        }
+        @keyframes animate
+        {
+            100%
+            {
+                right: 100%;
+            }
+        }
+        .toast .close:hover
+        {
+            opacity: 1;
+        }
+        button
+        {
+            padding: 10px 20px;
+            font-size: 1.3em;
+            outline: none;
+            border: none;
+            background: #4070f4;
+            border-radius: 6px; 
+            cursor: pointer;
+            color: #fff;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        button:hover
+        {
+            background: #1b41aa;
+        }
+    </style>
+</head>
+<body>
+    <div class="toast">
+        <div class="toastContent">
+            <i class="fas fa-solid fa-check check"></i>
+            
+            <div class="message">
+                <span class="text text-1">Success</span>
+                <span class="text text-2">Your Changes Has Been Saved</span>
+            </div>
+        </div>
+
+        <i class="fa-solid fa-xmark close"></i>
+
+        <div class="progress"></div>
+    </div>
+
+    <button>Show Toast</button>
+
+    <script>
+
+        const button = document.querySelector("button"),
+              toast  = document.querySelector(".toast"),
+              closeIcon = document.querySelector(".close"),
+              progress  = document.querySelector(".progress");
+              
+        button.addEventListener("click", ()=>
+        {
+            toast.classList.add("active");
+            progress.classList.add("active");
+            
+            setTimeout(()=>
+            {
+                toast.classList.remove("active");
+
+            }, 5000);
+
+            setTimeout(()=>
+            {
+                progress.classList.remove("active");
+
+            }, 5300);
+        });
+
+        closeIcon.addEventListener("click", ()=>
+        {
+            toast.classList.remove("active");
+            setTimeout(()=>
+            {
+                progress.classList.remove("active");
+
+            }, 300)
+        })
+        
+    </script>
+</body>
+</html>
