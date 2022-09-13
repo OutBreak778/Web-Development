@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Radial Menu Bar</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg,#8460ed,#ff1252)
+        }
+        .menu
+        {
+            position: relative;
+            width: 350px;
+            height: 350px;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .menu li
+        {
+            position: absolute;
+            list-style: none;
+            transform-origin: 175px;
+            left: 1px;
+            transition: transform 0.5s;
+            transition-delay: calc(0.1s * var(--i));
+            transform: rotate(0) translateX(150px);
+        }
+        .menu.active li
+        {
+            transform: rotate(calc(360deg / 8 * var(--i)));
+        }
+        .menu li a 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #4fc3dc;
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            transform: rotate(calc(360deg / -8 * var(--i)));
+        }
+        .toggle
+        {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 4px rgba(0,0,0,0.15);
+            transition: 0.5s;
+        }
+        .menu.active .toggle
+        {
+            transform: rotate(315deg);
+            background: #f00;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+        <div class="toggle"><span class="iconify" data-height="32" data-icon="ion:add" data-width="32"></span>
+        </div>
+        <li style="--i:0;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:home-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:1;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:person-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:2;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:settings-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:3;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:mail-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:4;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:key-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:5;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:mail-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:6;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:game-controller-outline" data-width="32"></span>
+            </a>
+        </li>
+        <li style="--i:7;">
+            <a href="#"><span class="iconify" data-height="32" data-icon="ion:camera-outline" data-width="32"></span>
+            </a>
+        </li>
+    </div>
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+    <script>
+        let toggle = document.querySelector('.toggle');
+        let menu = document.querySelector('.menu');
+        toggle.onclick = function()
+        {
+            menu.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
