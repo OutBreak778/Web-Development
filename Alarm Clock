@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Alarm Clock | Javascript</title>
+    
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        body
+        {
+            user-select: none;
+            min-height: 100vh;
+            background: #4a98f7;
+        }
+        body, .wrapper, .content
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .wrapper
+        {
+            width: 440px;
+            padding: 30px 20px 38px;
+            border-radius: 10px;
+            background: #fff;
+            flex-direction: column;
+        }
+        .wrapper img
+        {
+            width: 150px;
+            height: 150px;
+        }
+        .wrapper h1
+        {
+            font-size: 2em;
+            font-weight: 600;
+            margin: 30px 0;
+        }
+        .wrapper .content
+        {
+            width: 100%;
+            background: #fff;
+            justify-content: space-between;
+            user-select: none;
+        }
+        .wrapper .content.disable
+        {
+            opacity: 0.3;
+            pointer-events: none; /* Becasue of this the cursor will not point or get Clicked on the option button */
+        }
+        .content .column
+        {
+            width: calc(100% / 3 - 5px);
+            padding: 0 5px;
+            border-radius: 10px;
+            border: 1px solid #999;
+        }
+        .column select
+        {
+            outline: none;
+            border: none;
+            height: 53px;
+            width: 100%;
+            font-size: 20px;
+        }
+        .wrapper button
+        {
+            width: 100%;
+            margin-top: 20px;
+            font-size: 1.4em;
+            padding: 15px 0;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            background: #4a98f7;
+            color: #fff;
+            font-weight: 600;
+
+        }
+</style>
+</head>
+<body>
+    <div class="wrapper">
+        <img src="alarm.png" alt=" ">
+        <h1>00:00:00:PM</h1>
+        <div class="content">
+            <div class="column">
+                <select>
+                    <option value="hour" selected hidden>Hour</option>
+                </select>
+            </div>
+            <div class="column">
+                <select>
+                    <option value="minutes" selected hidden>minutes</option>
+
+                </select>
+            </div>
+            <div class="column">
+                <select>
+                    <option value="ampm" selected hidden>AM/PM</option>
+
+                </select>
+            </div>
+        </div>
+        <button>Set Alarm</button>
+    </div>
+
+    <script>
+        const currentTime = document.querySelector('h1'),
+        content = document.querySelector(".content"),
+        selectMenu = document.querySelectorAll('select'),
+        setAlarmbtn = document.querySelector('button');
+        
+        let alarmTime;
+
+        for(let i = 12; i > 0; i--)
+        {
+            i = i < 10 ? "0" + i: i;
+            console.log(i);
+            let option = `<option value="${i}">${i}</option>`;
+            selectMenu[0].firstElementChild.insertAdjacentHTML("afterend",option);
+        }
+        for(let i = 59; i > 0; i--)
+        {
+            i = i < 10 ? "0" + i: i;
+            console.log(i);
+            let option = `<option value="${i}">${i}</option>`;
+            selectMenu[1].firstElementChild.insertAdjacentHTML("afterend",option);
+        }
+        for(let i = 2; i > 0; i--)
+        {
+            i = i < 10 ? "0" + i: i;
+            let ampm = i == 1 ? "AM" : "PM";
+            let option = `<option value="${ampm}">${ampm}</option>`;
+            selectMenu[2].firstElementChild.insertAdjacentHTML("afterend",option);
+        }
+
+        setInterval(() => {
+
+            // This is used to getting Hours, Minutes, Seconds
+            let date = new Date(),
+            h = date.getHours(),
+            m = date.getMinutes(),
+            s = date.getSeconds(),
+            ampm = "AM";
+
+            // This will make the time in the 12 hours format
+            if(h >= 12)
+            {
+                h = h - 12;
+                ampm = "PM";
+            }
+
+            // If hour value is 0, set the value to 12
+            h = h == 0 ? h = 12 : h;
+            m = m == 0 ? m = 12 : m;
+            s = s == 0 ? s = 12 : s;
+
+            // Adding 0 before hr, min, sec if this value is less than 10
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+            
+            currentTime.innerText = (`${h}:${m}:${s} ${ampm}`);
+
+            if(alarmTime == `${h}:${m} ${ampm}`)
+            {
+                console.log("ALarm is ringing...");
+            }
+
+        }, 1000); // the 1000 written here shows the miliseconds which it will run in the program 
+
+        function setAlarm()
+        {
+            let time = `${selectMenu[0].value}:${selectMenu[1].value} ${selectMenu[0].value}`;
+
+            if(time.includes("hour") || time.includes("minutes") || time.includes("ampm"))
+            {
+                return alert("Please, select a valid time to set an Alarm!");
+            }
+            alarmTime = time;
+            content.classList.add("disable");
+            setAlarmbtn.innerText = "clear Alarm";
+        }
+        setAlarmbtn.addEventListener("click", setAlarm);
+
+    </script>
+</body>
+</html>
