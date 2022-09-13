@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonial Slider</title>
+    <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet">
+    <!-- Swiper Css -->
+    <link rel="stylesheet" href="swiper-bundle.min.css">
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        .container
+        {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e3f2fd;
+        }
+        .testimonial 
+        {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+        }
+        .testimonial .slide img
+        {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .testimonial .slide
+        {
+            display: flex;
+            justify-content: center;
+            row-gap: 30px;
+            align-items: center;
+            flex-direction: column;
+        }
+        .slide p
+        {
+            padding: 0 100px;
+            text-align: center;
+            font-size: 1.3em;
+            color: #333;
+            font-weight: 400;
+        }
+        .slide .quoteIcon
+        {
+            font-size: 1.7em;
+            color: #00d0ff;
+        }
+        .slide .details 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .details .name
+        {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #333;
+        }
+        .details .job
+        {
+            font-size: 1.1em;
+            font-weight: 500;
+            color: #333;
+        }
+        .navBtn
+        {
+            height: 40px;
+            width: 40px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease-in-out;
+            transform: translateY(30px);
+        }
+        .navBtn:hover
+        {
+            background: rgba(0,0,0,0.3);
+        }
+        .navBtn::before,
+        .navBtn::after
+        {
+            font-size: 1.5em;
+            color: #fff;
+        }
+        .swiper-pagination-bullet-active
+        {
+            background: #00d0ff;
+        }
+        @media screen and (max-width: 768px)
+        {
+            .slide p
+            {
+                padding: 0 70px;
+            }
+            .navBtn
+            {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <div class="testimonial mySwiper">
+            <div class="testiContent swiper-wrapper">
+                <div class="slide swiper-slide">
+                    <img class="image" src="img15.jpg" alt>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur 
+                        adipisicing elit. Sit vero, maxime tempora 
+                        maiores enim quas earum provident esse aliquid 
+                        explicabo, nostrum quo quaerat nam nihil 
+                        necessitatibus eos amet aspernatur? Asperiores.
+                    </p>
+
+                    <i class="bx bxs-quote-alt-left quoteIcon"></i>
+
+                    <div class="details">    
+                        <span class="name">Markus Lofer</span>
+                        <span class="job">Web Developer</span>
+                    </div>
+                </div>
+
+                <div class="slide swiper-slide">
+                    <img class="image" src="img13.jpg" alt>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur 
+                        adipisicing elit. Sit vero, maxime tempora 
+                        maiores enim quas eaur? Asperiores.
+                    </p>
+
+                    <i class="bx bxs-quote-alt-left quoteIcon"></i>
+
+                    <div class="details">    
+                        <span class="name">Andrew lanes</span>
+                        <span class="job">Software Engineer</span>
+                    </div>
+                </div>
+
+                <div class="slide swiper-slide">
+                    <img class="image" src="img16.jpg" alt>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur 
+                        adipisicing elit. Sit vero, maxime tempora 
+                        maiores enim quas earum provident esse aliquid 
+                        explicabo, nostrum quo quaerat nam nihil 
+                        necessitatibus eoipit voluptatem odit
+                        error tenetur laborum excepturi labore.
+                    </p>
+
+                    <i class="bx bxs-quote-alt-left quoteIcon"></i>
+
+                    <div class="details">    
+                        <span class="name">Danis Riachard</span>
+                        <span class="job">Computer Scientist</span>
+                    </div>
+                </div>
+
+                <div class="slide swiper-slide">
+                    <img class="image" src="RimuruImage2.jpg" alt>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur 
+                        adipisicing elit. Sit vero, maxime tempora 
+                        maiores enim quas earum provident esse aliquid 
+                        explicabo, nostrum quo quaerat nam nihil 
+                        necessitatibus eos amet Lorem ipsum dolor sit 
+                        amet consectetur adipisicing 
+                    </p>
+
+                    <i class="bx bxs-quote-alt-left quoteIcon"></i>
+
+                    <div class="details">    
+                        <span class="name">Rimuru Tempest </span>
+                        <span class="job">Isekai God</span>
+                    </div>
+                </div>
+
+                <div class="slide swiper-slide">
+                    <img class="image" src="ImgR.JPG" alt>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur 
+                        adipisicing elit. Sit vero, maxime tempora 
+                        maiores enim quas earum provident esse aliquid 
+                        explicabo, nostrum quo quaerat nam nihil 
+                        necessitatibus eos amet aspernatur? Asperiores.
+                    </p>
+
+                    <i class="bx bxs-quote-alt-left quoteIcon"></i>
+
+                    <div class="details">    
+                        <span class="name">Nikhil Mishra</span>
+                        <span class="job">Software Engineer</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-button-next navBtn"></div>
+            <div class="swiper-button-prev navBtn"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </section>
+
+    <!-- Swiper JS -->
+    <script src="swiper-bundle.min.js"></script>
+
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        grabCursor : true,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>
+</body>
+</html>
