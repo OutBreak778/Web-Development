@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft shadow</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; 
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #ac43ac;
+        }
+        .loader 
+        {
+            position: absolute;
+            width: 300px;
+            height: 400px;
+            background: #ac43ac;
+            border-radius: 40px;
+            box-shadow: inset 5px 5px 15px rgba(0,0,0,0.15),
+                        inset -5px -5px 15px rgba(255,255,255,0.25)
+                        /* 5px 5px 15px rgba(0,0,0,0.15); */
+        }
+        .loader::before
+        {
+            content: '';
+            position: absolute;
+            inset: 5px;
+            background: #fff;
+            border-radius: 40px;
+            transition: 0.5s;
+        }
+        .loader:hover::before
+        {
+            transform: translate(40px,-40px);
+            box-shadow: 10px 40px 60px rgba(0,0,0,0.15),
+                        10px 40px 60px rgba(255,255,255,0.25);
+        }
+    </style>
+</head>
+<body>
+    <div class="card"></div>
+    <div class="loader"></div>
+</body>
+</html>
