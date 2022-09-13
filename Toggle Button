@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Animated Menu Toggle</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+        .toggle
+        {
+            position: relative;
+            top: 0;
+            right: 25px;
+            width: 70px;
+            height: 70px;
+            background: #fff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .toggle span
+        {
+            position: absolute;
+            width: 40px;
+            height: 4px;
+            background: #1863ff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .toggle span:nth-child(1)
+        {
+            transform: translateY(-15px);
+            width: 25px;
+            left: 15px;
+        }
+        .toggle.active span:nth-child(1)
+        {
+            width: 40px;
+            transform: translateY(0) rotate(45deg);
+        }
+        .toggle span:nth-child(3)
+        {
+            width: 15px;
+            left: 15px;
+            transform: translateY(15px);
+        }
+        .toggle.active span:nth-child(3)
+        {
+            width: 40px;
+            transform: translateY(0) rotate(315deg);
+        }
+        .toggle.active span:nth-child(2)
+        {
+            transform: translateX(60px);
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <script>
+        let menuToggle = document.querySelector('.toggle');
+        menuToggle.onclick = function()
+        {
+            menuToggle.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
