@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Coming Soon</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            row-gap: 15px;
+            overflow: hidden;
+        }
+        .container .image
+        {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .container header
+        {
+            font-size: 3.5em;
+            color: #fff;
+            font-weight: 600;
+        }
+        .container p
+        {
+            font-size: 1.2em;
+            font-weight: 300;
+            color: #fff;
+            max-width: 600px;
+            text-align: center;
+        }
+        .container .TimeContent
+        {
+            display: flex;
+            column-gap: 30px;
+            align-items: center;
+        }
+        .container .TimeContent .Time
+        {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .Time .number,
+        .Time .text
+        {
+            font-weight: 500;
+            color: #fff;
+            font-size: 2em;
+        }
+        .Time .number
+        {
+            font-size: 1.7em;
+        }
+        .Time .text
+        {
+            font-size: 1.3em;
+            text-transform: uppercase;
+        }
+        .email 
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 30px;
+            width: 100%;
+        }
+        .email p
+        {
+            font-size: 1.5em;
+        }
+        .inputBox
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            max-width: 350px;
+            width: 100%;
+            margin-top: 40px;
+            margin-top: 20px;
+            column-gap: 20px;
+        }
+        .inputBox input,
+        .inputBox button
+        {
+            height: 100%;
+            background-color: rgba(255,255,255,0.1);
+            border: none;
+            outline: none;
+            border: 1px solid #fff;
+        }
+        .inputBox input
+        {
+            width: 100%;
+            color: #000;
+            font-weight: 500;
+            padding: 0 15px;
+        }
+        .inputBox input::placeholder
+        {
+            color: #fff;
+        }
+        .inputBox button
+        {
+            cursor: pointer;
+            color :#fff;
+            white-space: nowrap;
+            padding: 0 20px;
+        }
+        .inputBox button:hover
+        {
+            background: #fff;
+            color: #000;
+            transition: all 0.5s ease-in-out;
+        }
+        @media screen and (max-width: 300px){
+            .container
+            {
+                font-size: 15px;
+                text-align: nowrap;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <section class="container">
+        <img src="pexelsroad.jpg" class="image" alt="">
+        <header>Coming Soon Page</header>
+        <p>Our Website is under Construction. we're working hard on it. We hope you can wait Patiently.
+            Thank You for Waiting Patiently we are back
+        </p>
+        <div class="TimeContent">
+            <div class="Time days">
+                <span class="number"></span>
+                <span class="text">Days</span>
+            </div>
+            <div class="Time hours">
+                <span class="number"></span>
+                <span class="text">Hours</span>
+            </div>
+            <div class="Time minutes">
+                <span class="number"></span>
+                <span class="text">minutes</span>
+            </div>
+            <div class="Time seconds">
+                <span class="number"></span>
+                <span class="text">Seconds</span>
+            </div>
+        </div>
+
+        <div class="email content">
+            <p>Subscribe now to get the Latest Updates!</p>
+
+            <div class="inputBox">
+                <input type="email" placeholder="Enter Your Email">
+                <button>Notify Me</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const seconds = document.querySelector(".seconds .number");
+        minutes = document.querySelector(".minutes .number");
+        hours = document.querySelector(".hours .number");
+        days = document.querySelector(".days .number");
+    
+        console.log(days,hours,minutes,seconds);
+        
+        let secValue = 5,
+            minValue = 1,
+            hourValue = 18,
+            dayValue = 9;
+
+        const timeFunction = setInterval(()=>
+        {
+            secValue--;
+            if(secValue === 0)
+            {
+                minValue--;
+                secValue = 59;
+            }
+            
+            if(minValue === 0)
+            {
+                hourValue--;
+                minValue = 59;
+            }
+            
+            if(hourValue === 0)
+            {
+                dayValue--;
+                hourValue = 24;
+            }
+
+            if(dayValue === 0)
+            {
+                clearInterval(timeFunction)
+            }
+            seconds.textContent = secValue < 10 ? `0${secValue}` : secValue;
+            minutes.textContent = minValue < 10 ? `0${minValue}` : minValue;
+            hours.textContent = hourValue < 10 ? `0${hourValue}` : hourValue;
+            days.textContent = dayValue < 10 ? `0${dayValue}` : dayValue;
+        },1000); // The 1000ms will be equal to 1 seconds
+            
+    </script>
+</body>
+</html>
