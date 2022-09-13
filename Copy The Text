@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copy Text To Clipboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Balsamiq+Sans:ital@0;1&family=PT+Sans:ital@1&family=Poppins:wght@300&family=Varela+Round&display=swap');
+
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body
+        {
+            min-height: 140vh;
+            width: 100%;
+            background: #fdfdfd;
+        }
+        .textBoxes
+        {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center; 
+            padding: 0 30px;
+            margin-bottom: 60px;
+        }
+        .textBoxes .textBox
+        {
+            height: 380px;
+            min-width: 660px;
+            width: 100%;
+            margin: 55px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .textBoxes .textBox .topic
+        {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #265df2;
+            margin: 5px;
+        }
+        .textBoxes .textBox textarea
+        {
+            height: 100%;
+            max-width: 880px;
+            width: 100%;
+            padding: 30px;
+            font-size: 15px;
+            font-weight: 400;
+            outline: none;
+            border: 1px solid #265df2;
+            border-radius: 10px;
+            background: #e7edfe;
+        }
+        .textBox textarea::webkit-scrollbar
+        {
+            display: none;
+        }
+        .textBoxes .textBox button
+        {
+            height: 45px;
+            width: 155px;
+            color: #fff;
+            background: #265df2;
+            outline: none;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.2em;
+            font-weight: 400;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.4s ease;
+        }
+        .textBoxes .textBox button:hover
+        {
+            background: #0e4bf1;
+        }
+        .textBoxes .textBox textarea
+        {
+            position: re;
+        }
+        @media (max-width: 400px)
+        {
+            .textBoxes .textBox button
+            {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="textBoxes">
+        <div class="textBox HTMLbox">
+            <div class="topic">HTML Code</div>
+            <textarea id="HTMLbox" readonly>
+                Here you can add the HTML Code from the Source and then Copy it
+            </textarea>
+            <button id="HTMLButton">Copy Code</button>
+        </div>   
+
+
+        <div class="textBox CSSbox">
+            <div class="topic">CSS Code</div>
+            <textarea id="CSSbox" readonly>
+                Here you can add the CSS Code from the Source and then Copy it
+            </textarea>
+            <button id="CSSButton">Copy Code</button>
+        </div>  
+        
+        
+
+        <div class="textBox JSbox">
+            <div class="topic">JS Code</div>
+            <textarea id="JSbox" readonly>
+                Here you can add the Javascript Code from the Source and then Copy it
+            </textarea>
+            <button id="JSButton">Copy Code</button>
+        </div>   
+    </div>
+
+    <script>
+        // HTML Box JS Code
+        let HTMLBox = document.getElementById("HTMLbox");
+        let HTMLButton = document.getElementById("HTMLButton");
+
+        HTMLButton.onclick = function ()
+        {
+            HTMLBox.select();
+            document.execCommand("copy");
+
+            HTMLButton.innerHTML = "Code Copied"
+            // Just use the select() function to select the id of the box and then use predefined function of execCommand() for every selection part
+        }
+
+
+        // CSS Box JS Code
+        let CSSBox = document.getElementById("CSSbox");
+        let CSSButton = document.getElementById("CSSButton");
+
+        CSSButton.onclick = function ()
+        {
+            CSSBox.select();
+            document.execCommand("copy");
+
+            // Just use the select() function to select the id of the box and then use predefined function of execCommand() for every selection part
+
+            CSSButton.innerHTML = "Code Copied"
+        }
+
+
+        // JS Box JS Code
+        let JSBox = document.getElementById("JSbox");
+        let JSButton = document.getElementById("JSButton");
+
+        JSButton.onclick = function ()
+        {
+            JSBox.select();
+            document.execCommand("copy");
+
+            // Just use the select() function to select the id of the box and then use predefined function of execCommand() for every selection part
+
+            JSButton.innerHTML = "Code Copied"
+        }
+    </script>
+
+</body>
+</html>
