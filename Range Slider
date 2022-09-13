@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range Slider</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #222;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        div
+        {
+            position: relative;
+        }
+        #rangeValue
+        {
+            position: absolute;
+            top: 2px;
+            right: -60px;
+            padding: 2px;
+            width: 50px;
+            box-sizing: border-box;
+            background: #fff;
+            text-align: center;
+        }
+        #rangeValue::before
+        {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+            left: -4px;
+            width: 10px;
+            height: 10px;
+            font-weight: 500;
+            color: #000;
+            background: #fff;
+        }
+        .range
+        {
+            width: 400px;
+            height: 2px;
+            background: #111;
+            -webkit-appearance: none;
+            outline: none;
+            border-radius: 2px;
+        }
+        .range::-webkit-slider-thumb
+        {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #00bcd4
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <span id="rangeValue">0</span>
+        <input type="range" class="range" name="" value="" min="0" max="1000" onmousemove="rangeSlider(this.value)" onchange="rangeSlider(this.value)">
+    </div>
+
+    <script>
+        function rangeSlider(value)
+        {
+            document.getElementById('rangeValue').innerHTML = value;
+        }
+    </script>
+</body>
+</html>
