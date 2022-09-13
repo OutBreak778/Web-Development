@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyPad Outline</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #10131c;
+        }
+        .navigation
+        {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            background: #212532;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+            transition-delay: 0.8s;
+        }
+        .navigation.active
+        {
+            width: 200px;
+            height: 200px;
+            transition-delay: 0s;
+        }
+        .navigation span
+        {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #fff;
+            border-radius: 50%;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition-delay: calc(0.1s * var(--i));
+            transform: translate(calc(12px * var(--x)),calc(12px * var(--y)));
+        }
+        .navigation.active span
+        {
+            transform: translate(calc(60px * var(--x)),calc(60px * var(--y)));
+            width: 45px;
+            height: 45px;
+            background: #333849;
+        } 
+        .navigation span .iconify
+        {
+            transition: 0.5s;
+            opacity: 0;
+        }
+        .navigation.active span .iconify
+        {
+            font-size: 1.3rem;
+            opacity: 1;
+            color: #fff;
+            border-radius: 100%;
+        }
+        .navigation.active span:hover .iconify
+        {
+            color: #2dfc52;
+            filter: drop-shadow(0 0 3px #2dfc52) drop-shadow(0 0 5px #2dfc52) drop-shadow(0 0 10px #2dfc52);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <span style="--i:0;--x:-1;--y:-1;">
+            <span class="iconify" data-height="32" data-icon="ion:home-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:1;--x:1;--y:1;">
+            <span class="iconify" data-height="32" data-icon="ion:mail-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:2;--x:0;--y:1;">
+            <span class="iconify" data-height="32" data-icon="ion:game-controller-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:3;--x:1;--y:0;">
+            <span class="iconify" data-height="32" data-icon="ion:camera-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:4;--x:-1;--y:0;">
+            <span class="iconify" data-height="32" data-icon="ion:settings-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:5;--x:0;--y:-1;">
+            <span class="iconify" data-height="32" data-icon="ion:mail-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:6;--x:-1;--y:1;">
+            <span class="iconify" data-height="32" data-icon="ion:key-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:7;--x:1;--y:-1;">
+            <span class="iconify" data-height="32" data-icon="ion:person-outline" data-width="32"></span>
+        </span>
+
+        <span style="--i:8;--x:0;--y:0;">
+            <span class="iconify" data-height="32" data-icon="ion:rainy-outline" data-width="32"></span>
+
+        </span>
+
+    </div>
+
+    <!-- it make the popup of the dot's in line wise -->
+    <!-- <div class="navigation">
+        <span style="--i:0;--x:-1;--y:-1;"></span>
+        <span style="--i:1;--x:0;--y:-1;"></span>
+        <span style="--i:2;--x:1;--y:-1;"></span>
+        <span style="--i:3;--x:-1;--y:0;"></span>
+        <span style="--i:4;--x:0;--y:0;"></span>
+        <span style="--i:5;--x:1;--y:0;"></span>
+        <span style="--i:6;--x:-1;--y:1;"></span>
+        <span style="--i:7;--x:0;--y:1;"></span>
+        <span style="--i:8;--x:1;--y:1;"></span>
+    </div> -->
+
+    <script>
+        let navigation  = document.querySelector('.navigation');
+        navigation.onclick = function ()
+        {
+            navigation.classList.toggle('active');
+        }
+    </script>
+
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+</body>
+</html>
