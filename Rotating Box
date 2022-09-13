@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rotating Square Animation Effect</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        section
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            animation: change 4s steps(1) infinite;
+        }
+        @keyframes change 
+        {
+            0%
+            {
+                background: #ff0;
+            }    
+            25%
+            {
+                background: #0ff;
+            }    
+            50%
+            {
+                background: #0f0f;
+            }    
+            75%
+            {
+                background: #ff478f;
+            }   
+            100%
+            {
+                background: #ff0;
+            }  
+        }
+        .loader
+        {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background: #000;
+            animation: rotate 1s linear infinite;
+        }
+        .loader div
+        {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            animation: animate 1s linear infinite;
+        }
+        @keyframes animate
+        {
+            0%
+            {
+                transform: rotate(0deg);
+            }   
+            50%,100%
+            {
+                transform: rotate(180deg);
+            }
+        }
+        @keyframes rotate 
+        {
+            0%
+            {
+                transform: rotate(90deg);
+            }    
+            50%,100%
+            {
+                transform: rotate(0deg);
+            }
+        }
+        .loader div:nth-child(1)
+        {
+            top: -100%;
+            left: -2px;
+            transform-origin: bottom right;
+        }
+        .loader div:nth-child(1)::before
+        {
+            background: #ff0;
+        }
+        .loader div:nth-child(2)
+        {
+            right: -100%;
+            top: -2px;
+            transform-origin: bottom left;
+        }
+        .loader div:nth-child(2)::before
+        {
+            background: #0ff;
+        }
+        .loader div:nth-child(3)
+        {
+            bottom: -100%;
+            left: 2px;
+            transform-origin: top left;
+        }
+        .loader div:nth-child(3)::before
+        {
+            background: #0f0f;
+        }
+        .loader div:nth-child(4)
+        {
+            left: -100%;
+            top: 2px;
+            transform-origin: top right;
+        }
+        .loader div:nth-child(4)::before
+        {
+            background: #ff478f;    
+        }
+        .loader div::before,
+        .loader::before
+        {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            right: 3px;
+            bottom: 3px;
+            background: #fff;
+        }
+        
+    </style>
+</head>
+<body>
+    <section>
+        <div class="loader">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </section>
+</body>
+</html>
