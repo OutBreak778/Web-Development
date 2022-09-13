@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Button Animation</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        body
+        {
+            min-height: 100vh;
+            background: #7d2ae8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .toggle
+        {
+            position: relative;
+            height: 12px;
+            width: 120px;
+            background: #fff;   
+            border-radius: 15px;
+            cursor: pointer;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);         
+        }
+        .toggle::before
+        {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 35px;
+            transform: translate(-50%,-50%);            
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background: #7D2AE8;
+            border: 10px solid #fff;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .toggle.active::before
+        {
+            left: calc(100% - 33px);
+            background: #fff;
+            border: 10px solid #7D2AE8;
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle"></div>
+    <script>
+        const toggleButton = document.querySelector('.toggle');
+        toggleButton.onclick = function ()
+        {
+            toggleButton.classList.toggle('active');
+
+            // The below line is also one of th function which is used to make 
+            // the toggle button active
+            
+            // toggleButton.addEventListener("click",()=>
+            // {
+            //     toggleButton.toggle("active");
+            // })
+        }
+    </script>
+</body>
+</html>
