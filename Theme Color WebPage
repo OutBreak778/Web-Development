@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Customise Color Theme</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Balsamiq+Sans:ital@0;1&family=PT+Sans:ital@1&family=Poppins:wght@300&family=Varela+Round&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+        }
+        :root
+        {
+            --white: #fff;
+            --black: #000;
+            --navMain: #4070f4;
+            --switcher: #0b3cc1;
+            --lightBg: #f0f8ff;
+        }
+        nav
+        {
+            position: relative;
+            top: 0;
+            left: 0;
+            height: 70px;
+            width: 100%;
+            background: var(--navMain);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        nav .navBar
+        {
+            height: 100%;
+            max-width: 1300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: auto;
+            padding: 0 20px;
+        }
+        .navBar .logo a
+        {
+            font-size: 2em;
+            font-weight: 900;
+            text-decoration: none;
+            color: var(--white);
+        }
+        .navBar .navLink
+        {
+            display: flex;
+        }
+        .navBar .navLink li 
+        {
+            list-style: none;
+            margin: 0 10px;
+        }
+        .navBar .navLink li a
+        {
+            text-decoration: none;
+            font-size: 1.16em;
+            color: #fff;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+        .navBar .navLink li a:hover
+        {
+            opacity: 1;
+        }
+        .navBar .appearance
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .appearance .lightDark,
+        .appearance .colorIcon .icons
+        {
+            height: 50px;
+            width: 50px;
+            text-align: center;
+            line-height: 50px;
+            color: var(--white);
+            font-size: 1.2em;
+            margin: 0 10px;
+            border-radius: 5px;
+            background: var(--switcher);
+            opacity: 0.8; 
+            cursor: pointer;
+            opacity: 0.8;
+            cursor: pointer;
+        }
+        .appearance .colorIcon
+        {
+            position: relative;
+        }
+        .appearance .colorIcon .icons
+        {
+            width: 70px;
+        }
+        .appearance .lightDark:hover,
+        .appearance .colorIcon .icons:hover
+        {
+            opacity: 1;
+        }
+
+
+
+
+
+
+
+        .appearance .colorIcon .colorBox
+        {
+            position: absolute;
+            bottom: -133px;
+            right: 0;
+            min-height: 100px;
+            background: var(--white);
+            border-radius: 10px;
+            padding: 15px 20px 20px 20px;
+            opacity: 0;
+            pointer-events: none;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2); 
+        }
+        .colorIcon .colorBox::after
+        {
+            content: '';
+            position: absolute;
+            right: 20px;
+            top: -10px;
+            height: 20px;
+            width: 20px;
+            background: var(--white);
+            transform: rotate(45deg);
+        }
+        .colorIcon.open .colorBox
+        {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .colorIcon.open .arrow
+        {
+            transform: rotate(-180deg);
+        }
+        .colorIcon .colorBox h3
+        {
+            display: inline-block;
+            white-space: nowrap;
+            font-size: 1.1em;
+            font-weight: 600;
+            width: 100%;
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .colorBox .colorSwitcher
+        {
+            display: flex;
+        }
+        .colorBox .colorSwitcher .btn
+        {
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            outline: none;
+            border: none;
+            border-radius: 50%;
+            background: #4070f4; 
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .colorSwitcher .btn.active
+        {
+            box-shadow: 0 0 0 2px #fff,
+                        0 0 0 4px #4070f4;
+        }
+        .colorSwitcher .btn.orange
+        {
+            background: #f79f1f;
+        }
+        .colorSwitcher .btn.orange.active
+        {
+            box-shadow: 0 0 0 2px #fff,
+                        0 0 0 4px #f79f1f;
+        }
+        .colorSwitcher .btn.purple
+        {
+            background: #8e44ad;
+        }
+        .colorSwitcher .btn.purple.active
+        {
+            box-shadow: 0 0 0 2px #fff,
+                        0 0 0 4px #8e44ad;
+        }
+        .colorSwitcher .btn.green
+        {
+            background: #2a6f31;
+        }
+        .colorSwitcher .btn.green.active
+        {
+            box-shadow: 0 0 0 2px #fff,
+                        0 0 0 4px #2a6f31;
+        }
+        .homeContent
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 60px;
+            height: 100vh;
+            width: 100%;
+            background: var(--lightBg);
+        }
+        .homeContent h2
+        {
+            font-size: 40px;
+            color: var(--black);
+        }
+        .homeContent h3
+        {
+            font-size: 30px;
+            color: var(--black);
+        }
+        .homeContent h3 span
+        {
+            color: var(--navMain);
+        }
+        .homeContent h3 span.darkMode
+        {
+            color: var(--black);
+        }
+        .homeContent p
+        {
+            font-size: 1em;
+            width: 40%;
+            color: var(--black);
+            margin-bottom: 30px;
+        }
+        .homeContent a
+        {
+            font-size: 1.3em;
+            padding: 12px 24px;
+            color: var(--white);
+            background: var(--navMain);
+            text-decoration: none;
+            border-radius: 10px;
+        }
+        .homeContent a:hover
+        {
+            background: var(--switcher);
+        }
+        .homeContent a i
+        {
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 1100px)
+        {
+            .homeContent p
+            {
+                width: 70%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navBar">
+            <div class="logo"><a href="#">NexterStore</a></div>
+            <ul class="navLink">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Skills</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contacts</a></li>
+            </ul>
+            <div class="appearance">
+                <div class="lightDark">
+                    <i class="btn fa-solid fa-moon" data-color="#e4e6eb #e4e6eb #24292d #24292d #242526"></i>
+                </div>
+                <div class="colorIcon">
+                    <div class="icons">
+                        <i class="fa-solid fa-palette"></i>
+                        <i class="fa-solid fa-sort-down arrow"></i>
+                    </div>
+                    <div class="colorBox">
+                        <h3>Color Switcher</h3>
+                        <div class="colorSwitcher">
+                            <button class="btn blue active" data-color="#fff #24292d #4070f4 #0b3cc1 #f0f8ff"></button>
+                            <button class="btn orange" data-color="#fff #24292d #f79f1f #dd8808 #fef5e6"></button>
+                            <button class="btn purple" data-color="#fff #24292d #8e44ad #783993 #eadaf1"></button>
+                            <button class="btn green" data-color="#fff #24292d #3a9943 #2a6f31 #daf1dc"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="homeContent">
+        <texts>
+            <h2>Customise Your Website</h2>
+            <h3>With a <span>Beautiful Colour...</span></h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid vitae qui quia, facere soluta ipsum. Exercitationem labore velit asperiores eveniet minus expedita maiores voluptatum Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia nesciunt temporibus nostrum ad aliquid est labore quae voluptatum, eaque enim! itaque Ipsum laborum veniam asperiores hic numquam praesentium?</p>
+            <div class="button">
+                <a href="#">
+                    Explore
+                    <i class="fas fa-location-arrow"></i>
+                </a>
+            </div>
+        </texts>
+    </section>
+
+    <script>
+        // code to make Color Box enable or disable
+        let colorIcons = document.querySelector(".colorIcon"),
+            icons = document.querySelector(".colorIcon .icons");
+
+        icons.addEventListener("click", ()=>
+        {
+            colorIcons.classList.toggle("open");
+        })
+
+        // JS code to switch color(also day and night mode)
+        // getting all .btn elements
+
+        let buttons = document.querySelectorAll(".btn");
+        for(var button of buttons)
+        {
+            button.addEventListener("click", (e)=>
+            {
+                let target = e.target;
+
+                let open = document.querySelector(".open");
+
+                if(open) open.classList.remove("open");
+                
+                document.querySelector(".active").classList.remove("active");
+                target.classList.add("active");
+
+
+                // // JS code to switch colour
+                let root = document.querySelector(":root"),
+                dataColor = target.getAttribute("data-color"),// getting data-color value that is clicked
+                color = dataColor.split(" "); // splitting each color form with a white space
+
+                root.style.setProperty("--white", color[0])
+                root.style.setProperty("--black", color[1])
+                root.style.setProperty("--navMain", color[2])
+                root.style.setProperty("--switcher", color[3])
+                root.style.setProperty("--lightBg", color[4])
+                
+                let iconName = target.className.split(" ")[2]
+                colorText = document.querySelector(".homeContent span")
+
+
+                if(target.classList.contains("fa-moon"))
+                {
+                    target.classList.replace(iconName , "fa-sun");
+                    colorIcons.style.display = "none";
+                    colorText.classList.add("darkMode");
+                }
+                else if(target.classList.contains("fa-sun"))
+                {
+                    target.classList.replace(iconName , "fa-moon");
+                    colorIcons.style.display = "block";
+                    colorText.classList.remove("darkMode");
+                    document.querySelector(".btn.blue").click();
+                }
+
+
+                console.log(iconName);
+
+            });
+        };
+
+    </script>
+
+</body>
+</html>
