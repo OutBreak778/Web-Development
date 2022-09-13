@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font size Changing</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container
+        {
+            position: relative;
+            margin: 10px;
+        }
+        .container .content
+        {
+            display: inline-block;
+            position: relative;
+            margin: 50px 0;
+            padding: 10px;
+        }
+        .container .buttons
+        {
+            position: absolute;
+            padding: 10px;
+            right: 0;
+        }
+        .container .buttons .btn
+        {
+            border: 2px solid #000;
+            padding: 0 5px;
+            cursor: context-menu;
+            user-select: none;
+            margin: 10px;
+        }
+        .container .buttons .btn.active
+        {
+            background: #000;
+            color: #fff;
+        }
+        .container .buttons .btn:nth-child(2)
+        {
+            font-size: 1.4em;
+        }
+        .container .buttons .btn:nth-child(3)
+        {
+            font-size: 1.8em;
+        }
+        .container .content
+        {
+            transition: 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="buttons">
+            <span class="btn active" onclick="document.getElementById('text').style.fontSize = '1.1em'">A</span>
+            <span class="btn" onclick="document.getElementById('text').style.fontSize = '1.4em'">A</span>
+            <span class="btn" onclick="document.getElementById('text').style.fontSize = '1.9em'">A</span>
+        </div>
+        <div class="content" id="text">
+            <h2>Font Size</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis minima veritatis aspernatur repudiandae quod similique, eligendi optio voluptas dolorem nam? Quo exercitationem odit eos aut, aperiam similique reprehenderit non ea neque tempore eius doloribus aspernatur voluptates animi dolores expedita quisquam illo reiciendis, placeat ab natus sit assumenda voluptatum debitis. Quam quos esse aliquam inventore, totam officiis voluptatum aperiam reprehenderit voluptates quisquam quo iste veritatis commodi facilis rerum, et consequatur, exercitationem autem? Alias, repellendus iure sit ab illo est excepturi doloremque delectus iste consequuntur. Ratione ut unde doloribus quisquam ad reprehenderit, blanditiis veritatis dolorem eos hic? Officia ea doloribus rem eaque odit, delectus aperiam vitae molestiae cum dolorum. Deleniti doloribus ex distinctio recusandae officiis sequi, dignissimos quod ad quos animi blanditiis libero provident. Voluptatibus necessitatibus eaque porro, ullam quod exercitationem saepe eum soluta blanditiis ad aliquid atque officia ex excepturi perspiciatis minima voluptas animi similique, earum ducimus. Accusantium tenetur voluptatum iste sint minus perferendis suscipit, omnis modi dolores voluptatibus repudiandae voluptates officia nam inventore. Temporibus atque soluta laudantium laboriosam et ex totam nesciunt! Fugit laudantium numquam, voluptas quo repudiandae nulla doloribus voluptates odit porro eligendi ipsum vitae hic perferendis nam veniam adipisci architecto eaque odio temporibus distinctio magni! Voluptatem, sapiente voluptatum.</p>
+        </div>
+    </div>    
+
+    <script>
+        let btn = document.querySelectorAll('.btn');
+        for( var i = 0; i < btn.length; i++)
+        {   
+            btn[i].addEventListener('click', function()
+            {
+                let now = document.getElementsByClassName('active');
+                now[0].className = now[0].className.replace('active','');
+                this.className += ' active';
+            })
+        }   
+
+    </script>
+</body>
+</html>
