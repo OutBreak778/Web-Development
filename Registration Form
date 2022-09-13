@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" rel="stylesheet" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <title>Registration Page With Javascript</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital@0;1&family=PT+Sans:ital@1&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body
+        {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #4070f4;
+        }
+        .container
+        {
+            position: relative;
+            max-width: 900px;
+            width: 100%;
+            border-radius: 5px;
+            padding: 30px;
+            margin: 0 15px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+        .container header
+        {
+            position: relative;
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
+        .container header::before
+        {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            height: 3px;
+            width: 30px;
+            background: #4070f4;
+        }
+        .container form
+        {
+            position: relative;
+            margin-top: 15px;
+            min-height: 500px;
+            background: #fff;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .container form .form
+        {
+            position: absolute;
+            background: #fff;                                                                                   
+        }
+        .container form .form.first
+        {
+            opacity: 1;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .container form .form.second
+        {
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            opacity: 0;
+            pointer-events: none;
+        }
+        form.active .form.second
+        {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(0);
+        }
+        form.active .form.first
+        {
+            opacity: 0;
+            pointer-events: auto;
+            transform: translateX(-100%);
+        }
+        .container form .title
+        {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 5px 0;
+            color: #333;
+        }
+        .container form .fields
+        {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        form .fields .inputFields
+        {
+            display: flex;
+            width: calc(100% / 3 - 15px);
+            flex-direction: column;
+            margin: 5px 0;
+        }
+        .inputFields label
+        {
+            font-size: 1em;
+            font-weight: 600;
+            color: #2e2e2e;
+        }
+        .inputFields input
+        {
+            outline: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            border-radius: 5px;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            height: 40px;
+            margin: 10px 0;
+        }
+        form .form.second .inputFields .selectOpt
+        {
+            outline: none;
+            border: 1px solid #aaa;
+            padding: 0 15px;
+            font-size: 0.9em;
+            border-radius: 5px;
+            height: 40px;
+            margin: 10px 0;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            cursor: context-menu;
+        }
+        .inputFields input:is(:focus, :valid)
+        {
+            box-shadow: 0 3px 6px rgba(0,0,0,0.14);
+        }
+        .inputFields input[type="date"]
+        {
+            color: #707070;
+        }
+        .inputFields input[type="date"]:valid
+        {
+            color: #333;
+        }
+        .container form button, .backBtn
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+            max-width: 200px;
+            width: 100%;
+            border: none;
+            outline: none;
+            color: #fff;
+            border-radius: 5px;
+            background: #4070f4;
+            margin: 20px 0;
+            transition: all 0.s linear;
+            cursor: pointer;
+        }
+        .container form button,
+        .container form .backBtn
+        {
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+        form .buttons
+        {
+            display: flex;
+            align-items: center;
+        }
+        form .buttons button, .backBtn
+        {
+            margin-right: 15px;
+        }
+        @media (max-width: 750px)
+        {
+            .container form
+            {
+                overflow: scroll;
+            }
+            form .fields .inputFields
+            {
+                width: calc(100% / 2 - 5px);
+            }
+        }
+    </style>    
+</head>
+<body>
+    <div class="container">
+        <header>Registration</header>
+        <form action="#">
+            <div class="form first">
+                <div class="details personal">
+                    <span class="title">Personal Details</span>
+
+                    <div class="fields">
+                        <div class="inputFields">
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter The Name">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Date Of Birth</label>
+                            <input type="date" placeholder="Enter The Birth Date">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Email</label>
+                            <input type="email" placeholder="Enter The Email">
+                        </div>
+                        
+
+                        <div class="inputFields">
+                            <label>Mobile Number</label>
+                            <input type="number" placeholder="Enter The Mobile Number">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Gender</label>
+                            <input type="text" placeholder="Enter The Gender">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Occupation</label>
+                            <input type="text" placeholder="Enter The Occupation">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="details ID">
+                    <span class="title">Identity Details</span>
+
+                    <div class="fields">
+                        <div class="inputFields">
+                            <label>ID Type</label>
+                            <input type="text" placeholder="Enter ID Type">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>ID Number</label>
+                            <input type="number" placeholder="Enter ID Number">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Issued Authority</label>
+                            <input type="text" placeholder="Enter Issued Authority">
+                        </div>
+                        
+
+                        <div class="inputFields">
+                            <label>Issued State</label>
+                            <input type="text" placeholder="Enter Issued State">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Issued Date</label>
+                            <input type="date" placeholder="Enter Issued Date">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Expiry Date</label>
+                            <input type="date" placeholder="Enter Expiry Date">
+                        </div>
+                    </div>
+
+                    <button class="nextBtn">
+                        <span class="btnText">Next</span>
+                    </button>
+
+                </div>
+                </div>
+
+
+            <div class="form second">
+                <div class="details address">
+                    <span class="title">Address Details</span>
+
+                    <div class="fields">
+                        <div class="inputFields">
+                            <label>Address Type</label>
+                            <input type="text" placeholder="Enter Address Type">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Nationality</label>
+                            <input type="text" placeholder="Enter Nationality">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>State</label>
+                            <select class="selectOpt">
+                                <option value="Mahararshtra">Mahararshtra</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Punjab">Punjab</option>
+                            </select>
+                        </div>
+                        
+
+                        <div class="inputFields">
+                            <label>District</label>
+                            <input type="text" placeholder="Enter The District">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Block Number</label>
+                            <input type="number" placeholder="Enter The Block Number">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Warn Number</label>
+                            <input type="number" placeholder="Enter The Ward Number">
+                        </div>
+                    </div>
+                </div>
+            
+
+
+                <div class="details family">
+                    <span class="title">Family Details</span>
+
+                    <div class="fields">
+                        <div class="inputFields">
+                            <label>Father Name</label>
+                            <input type="text" placeholder="Enter Your Father Name">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Mother Name</label>
+                            <input type="text" placeholder="Enter Your Mother Name">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Grandfather Name</label>
+                            <input type="text" placeholder="Enter Your Grandfather Name">
+                        </div>
+                        
+
+                        <div class="inputFields">
+                            <label>Spouse Name</label>
+                            <input type="text" placeholder="Enter Your Spouse Name">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Father in Law</label>
+                            <input type="text" placeholder="Enter Your Father in Law Name">
+                        </div>
+
+                        <div class="inputFields">
+                            <label>Mother in Law</label>
+                            <input type="text" placeholder="Enter Your Mother in Law Name">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <div class="backBtn">
+                        <span class="btnText">Back</span>
+                    </div>
+
+                    <button class="nextBtn">
+                        <span class="btnText">Next</span>
+                    </button>
+                </div>
+
+
+            </div>
+            
+        </form>
+    </div>
+
+    <script>
+        const form = document.querySelector("form"),
+              nextBtn = form.querySelector(".nextBtn"),
+              backBtn = form.querySelector(".backBtn"),
+              allInput = form.querySelectorAll(".first input");
+
+        nextBtn.addEventListener("click", ()=>
+        {
+            allInput.forEach(input=>
+            {
+                if(input.value != "")
+                {
+                    form.classList.add('active');
+                }
+                else
+                {
+                    form.classList.remove('active');
+                }
+            })
+        })
+        backBtn.addEventListener("click", ()=>   form.classList.remove('active'));
+    </script>
+
+</body>
+</html>
