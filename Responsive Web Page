@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reponsive Page</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #222;
+            font-family: sans-serif;
+        }
+        .container
+        {
+            width: 1200px;
+            height: auto;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 10px;
+            padding: 10px ;
+            box-sizing: border-box;
+        }
+        .container .box
+        {
+            position: relative;
+            background: #fff;
+            padding: 20px 40px 40px;
+            text-align: center;
+            border-radius: 20px;
+        }
+        .container .box:nth-child(1)
+        {
+            background: linear-gradient(45deg, #036eb7,#64eaff);
+        }
+        .container .box:nth-child(2)
+        {
+            background: linear-gradient(45deg, #E91E63,#ed55ff);
+        }
+        .container .box:nth-child(3)
+        {
+            background: linear-gradient(45deg, #086d08,#00ff72);
+        }
+        .container .box:nth-child(4)
+        {
+            background: linear-gradient(45deg, #f05a4f,#f4c030);
+        }
+        .container .box h2
+        {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            font-size: 100px;
+            color: #fff;
+            z-index: 1;
+            opacity: 0.5;
+        }
+        .container .box h2
+        {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            font-size: 24px;
+            text-transform: uppercase; 
+        }
+        .container .box p
+        {
+            margin: 0;
+            padding: 0;
+            color: #fff;
+            font-size: 18px;
+            /* text-transform: uppercase;  */
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <h2>1</h2>
+            <h3>Serivces Box</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, officia vero doloribus voluptatum tempora fugit architecto voluptates quasi aliquid nam, debitis aliquam animi deue nihil quaerat tenetur autem esse. Amet, eos?</p>
+        </div>
+        <div class="box">
+            <h2>2</h2>
+            <h3>Serivces Box</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, officia vero doloribus voluptatum tempora fugit architecto voluptates quasi aliquid nam, debitis aliquam anim</p>
+        </div>
+        <div class="box">
+            <h2>3</h2>
+            <h3>Serivces Box</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, officia vero doloribus voluptatum tempora fugit architecto voluptates quasi aliquid nam, debiti Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet.</p>
+        </div>
+        <div class="box">
+            <h2>4</h2>
+            <h3>Serivces Box</h3>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempore, officia vero doloribus voluptatum tempora fugit architecto voluptates quasi aliquid nam, debitis aliquistinctio quasi atque odio consequatur excepturi reprehenderit laudantium umque nihil quaerat tenetur autem esse. Amet, eos?</p>
+        </div>
+    </div>
+</body>
+</html>
