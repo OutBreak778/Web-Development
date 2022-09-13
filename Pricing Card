@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Card Table</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            box-sizing: border-box;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #232427;
+        }
+        body.active
+        {
+            background: #fff;
+        }
+        .container
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            padding: 100px 0 50px;
+        }
+        .container .card
+        {
+            position: relative;
+            min-width: 320px;
+            height: 500px;
+            box-shadow: inset 5px 5px 5px rgba(0,0,0,0.5),
+                        inset -5px -5px 15px rgba(255,255,255,0.1),
+                        5px 5px 15px rgba(0,0,0,0.2),
+                        5px -5px 15px rgba(255,255,255,.2);
+            border-radius: 15px;
+            margin: 30px;           
+             
+        }
+        .container .card .box
+        {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #1e1f23;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border-radius: 10px;
+            transition: 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s,box-shadow 0.5s;
+        }
+        body.active .container .card .box
+        {
+            background: rgba(255,255,255,1);
+            border: none;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        body.active .container .card:hover .box
+        {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        body.active .container .card .box .content ul li
+        {
+            color: #32a3b1;
+        }
+        body.active .container .card .box .content h3,
+        body.active .container .card .box .content h4
+        {
+            color: #32a3b1;
+        }
+
+        .container .card .box:hover
+        {
+                        border-top: 2px solid rgba(255,255,255,.2);
+            border-left: 2px solid rgba(255,255,255,.2);
+            border-right: 1px solid rgba(255,255,255,.2);
+            border-bottom: 1px solid rgba(255,255,255,.2);
+        }
+        .container .card:hover .box
+        {
+            transform: translateY(-50px);
+            box-shadow: 0 40px 70px rgba(0,0,0,0.5);
+        }
+        .container .card .box .content
+        {
+            padding: 20px;
+            text-align: center;
+        }
+        .container .card .box .icon
+        {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            background: #f00;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .container .card .box .icon .iconify
+        {
+            color: #fff;
+        }
+        .container .card .box .content h3
+        {
+            font-size: 2em;
+            color: #fff;
+            font-weight: 600;
+        }
+        .container .card .box .content h4
+        {
+            color: #fff;
+            font-size: 2.5em;
+        }   
+        .container .card .box .content h4 sup
+        {
+            font-size: 0.75em;
+        }
+        .container .card .box .content ul
+        {
+            position: relative;
+        }
+        .container .card .box .content ul li
+        {
+            list-style: none;
+            color: #fff;
+            margin: 5px 0;
+        }
+        .container .card .box .content a
+        {
+            position: relative;
+            display: inline-block;
+            padding: 8px 20px;
+            background: #4fc3dc;
+            margin-top: 15px;
+            border-radius: 20px;
+            color: #fff;
+            font-weight: 700;
+            text-decoration: none;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .container .card .box .content ul li .iconify:nth-child(4)
+        {
+            color: #f00;
+        }
+        .container .card:nth-child(1) .box .content a,
+        .container .card:nth-child(1) .box .icon
+        {
+            background: #008cff;
+            box-shadow: 0 10px 20px rgba(0,0,0,1);
+        }
+        .container .card:nth-child(2) .box .content a,
+        .container .card:nth-child(2) .box .icon
+        {
+            background: #e91e63;
+            box-shadow: 0 10px 20px rgba(0,0,0,1);
+        }
+        .container .card:nth-child(3) .box .content a,
+        .container .card:nth-child(3) .box .icon
+        {
+            background: #97dc47;
+            box-shadow: 0 10px 20px rgba(0,0,0,1);
+        }
+
+        .toggle
+        {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+            font-weight: 900;
+        }
+        .toggle.active
+        {
+            background: #000;
+            color: #fff;
+        }
+        .toggle.active .container .card .box .content h3
+        {
+            color: #000
+        }
+        .toggle.active::before
+        {
+            content: '';
+            position: absolute;
+        }
+        body.active .container .card
+        {
+            box-shadow: inset 10px 10px 10px rgba(0,0,0,0.02),
+                        inset -10px -10px 15px rgba(255,255,255,0.5),
+                        10px 10px 10px rgba(0,0,0,0.02),
+                        -10px -10px 15px rgba(255,255,255,0.5);              
+        }
+    </style>
+</head>
+<body>
+    <div class="toggle" onclick="action();"><span class="iconify" data-height="28" data-icon="ion:sunny-outline" data-width="28"></span>
+</div>
+    <div class="container">
+        <div class="card">
+            <div class="box">
+                <div class="content">
+                    <div class="icon"><span class="iconify" data-height="32" data-icon="ion:cart-outline" data-width="32"></span>
+                    </div>
+                    <h3>Basic </h3>
+                    <h4><sup>$</sup>55</h4>
+                    <ul>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>10 GB space</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>3 Domain Names</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>10 Email Address</li>
+                        <li><span class="iconify" data-icon="ion:close" style="color: red;"></span>Live Support</li>
+                    </ul>
+                    <a href="#">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="box">
+                <div class="content">
+                    <div class="icon"><span class="iconify" data-height="32" data-icon="ion:earth-outline" data-width="32"></span>
+
+                    </div>
+                    <h3>Standard </h3>
+                    <h4><sup>$</sup>90</h4>
+                    <ul>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>30 GB space</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>7 Domain Names</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>18 Email Address</li>
+                        <li><span class="iconify" data-icon="ion:close" style="color: red;"></span>Live Support</li>
+                    </ul>
+                    <a href="#">Order Now</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="card">
+            <div class="box">
+                <div class="content">
+                    <div class="icon"><span class="iconify" data-height="32" data-icon="ion:diamond-outline" data-width="32"></span>
+
+                    </div>
+                    <h3>Premium</h3>
+                    <h4><sup>$</sup>155</h4>
+                    <ul>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>1 TB space</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>5 Domain Names</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>20 Email Address</li>
+                        <li><span class="iconify" data-height="28" data-icon="ion:checkmark" data-width="28" style="color: lime;"></span>Live Support</li>
+                    </ul>
+                    <a href="#">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+    <script>
+
+        function action()
+        {
+            const toggle = document.querySelector('.toggle');
+            const body = document.querySelector('body');
+            body.classList.toggle('active');
+            toggle.classList.toggle('active');
+
+        }
+        
+    </script>
+</body>
+</html>
