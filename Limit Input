@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limiting the input Character</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+        body
+        {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            user-select: none;
+            background: linear-gradient(to top, #56e2d7,#58c3ff);
+        }
+        .wrapper
+        {
+            background: #fff;
+            padding: 20px;
+            width: 450px;
+            border-radius: 5px;
+        }
+        .wrapper form
+        {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .wrapper form input
+        {
+            height: 100%;
+            width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 0 50px 0 45px;
+            font-size: 25px;
+            outline: none;
+        }
+        .wrapper form:valid ~ .iconify
+        {
+            color: #fff;
+        }
+        .wrapper form input:focus,
+        .wrapper form input:valid
+        {
+            border-color: #58cff1;
+        }
+        .wrapper form .iconify
+        {
+            position: absolute;
+            width: 55px;
+            text-align: center;
+            font-size: 2em;
+            color: #c4c4c4;
+            pointer-events: none;
+        }
+        .wrapper form input::placeholder
+        {
+            color: rgba(0,0,0,0.7);
+            font-size: 20px;
+            font-weight: 900;
+        }
+        .wrapper form .counter
+        {
+            position: absolute;
+            right: 2px;
+            width: 55px;
+            text-align: center;
+            font-size: 25px;
+            color: #c9c9c9;
+            pointer-events: none;
+            border-left: 1px solid #d8d8d8;
+        }
+        .wrapper form input:valid ~ .counter
+        {
+            color: #00d0ff;
+            border-color: #58cff1;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="#">
+            <span class="iconify" data-height="28" data-icon="ion:at-circle-outline" data-width="28"></span>
+            <input type="text" placeholder="Username" maxlength="15" required>
+            <span class="counter">15</span>
+        </form>
+    </div>
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script>
+        const input = document.querySelector("form input");
+        counter = document.querySelector("form .counter");
+        maxLength = input.getAttribute("maxlength");
+
+        input.onkeyup = ()=>
+        {
+            counter.innerText = maxLength - input.value.length; // it make the length of the text by deducting it
+        }
+
+    </script>
+</body>
+</html>
