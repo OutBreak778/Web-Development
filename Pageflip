@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Fliping </title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background: #e91e63;
+        }
+        .loader
+        {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%,-50%);
+            width: 100px;
+            height: 100px;
+            background: #fff;
+            border-radius: 10px;
+            animation: animate 3s linear infinite;
+        }
+        @keyframes animate 
+        {
+            0%
+            {
+                transform: translate(-50%,-50%) perspective(200px) rotateX(0deg) rotateY(0deg);
+            }   
+            50%
+            {
+                transform: translate(-50%,-50%) perspective(200px) rotateX(180deg) rotateY(180deg);
+            } 
+            100%
+            {
+                transform: translate(-50%,-50%) perspective(200px) rotateX(360deg) rotateY(360deg);
+            } 
+        }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+</body>
+</html>
