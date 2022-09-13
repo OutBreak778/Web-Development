@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Sideba Menu</title>
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            box-sizing: border-box;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body
+        {
+            min-height: 100vh;
+            background: #150019
+        }
+        .navigation
+        {
+            position: fixed;
+            width: 60px;
+            height: 100%;
+            background: #3e0748;
+            transition: 0.5s;
+            overflow: hidden;
+        }
+        
+        /* .navigation:hover, */
+        .navigation.active
+        {
+            width: 300px;
+        }
+        .navigation ul 
+        {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        .navigation ul li:hover
+        {
+            background: #ff2972;
+        }
+        .navigation ul li
+        {
+            position: relative;
+            width: 100%;
+            list-style: none;
+        }
+        .navigation ul li a 
+        {
+            position: relative;
+            display: block;
+            width: 100%;
+            display: flex;
+            text-decoration: none;
+            color: #fff;
+        }
+        .navigation.active ul li a:hover
+        {
+            font-weight: 700;
+            color: #000;
+        }
+        .navigation ul li a .icon
+        {
+            position: relative;
+            display: block;
+            min-width: 60px;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+        }
+        .navigation ul li a .title
+        {
+            position: relative;
+            display: block;
+            min-width: 60px;
+            height: 60px;
+            line-height: 40px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .toggle
+        {
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 50px;
+            width: 50px;
+            background: #3e0748;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .toggle::before
+        {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 32px;
+            top: 10px;
+            background: #fff;
+            box-shadow: 0 10px #fff;
+            transition: 0.3s;
+        }
+        .toggle.active::before
+        {
+            content: '';
+            position: absolute;
+            top: 4px;
+            transform: translateY(20px) rotate(45deg);
+            box-shadow: 0 0 #555;
+        }
+        .toggle::after
+        {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 32px;
+            top: 30px;
+            background: #fff;
+            box-shadow: 0 10px #fff;
+            transition: 0.3s;
+        }
+        .toggle.active::after
+        {
+            content: '';
+            position: absolute;
+            top: 4px;
+            transform: translateY(20px) rotate(-45deg);
+            box-shadow: 0 0 #555;  
+        }
+        .toggle:hover,
+        .toggle.active
+        {
+            background: #ea1d63;
+        }
+
+        @media (max-width: 450px),(max-height: 300px)
+        {
+            .navigation
+            {
+                left: 0px;
+            }
+            .navigation.active
+            {
+                left: 0;
+                width: 50%;
+            }
+        }
+        
+
+
+
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <ul>
+            <li>
+                <a href="#">
+                    <span class="icon"><span class="iconify" data-height="32" data-icon="ion:home-outline" data-width="32"></span>
+                    </span>
+                    <span class="title">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><span class="iconify" data-height="32" data-icon="ion:person-add-outline" data-width="32"></span>
+                    </span>
+                    <span class="title">Profile</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><span class="iconify" data-height="32" data-icon="ion:mail-outline" data-width="32"></span>
+                    </span>
+                    <span class="title">Message</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><span class="iconify" data-height="32" data-icon="ion:settings-outline" data-width="32"></span>
+                    </span>
+                    <span class="title">Setting</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><span class="iconify" data-height="32" data-icon="ion:help-circle-outline" data-width="32"></span>
+                    </span>
+                    <span class="title">Help</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <span class="icon"><span class="icon"><span class="iconify" data-height="32" data-icon="ion:log-out-outline" data-width="32"></span>
+                    </span></span>
+                    <span class="title">Log Out</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="toggle" onclick="toggleMenu();"></div>
+
+
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+
+    <script>
+        function toggleMenu()
+        {
+            let navigation = document.querySelector('.navigation');
+            let toggle = document.querySelector('.toggle');
+            navigation.classList.toggle('active');
+            toggle.classList.toggle('active');
+        }
+
+    </script>
+
+</body>
+</html>
